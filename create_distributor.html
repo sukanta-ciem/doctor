@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Archivo+Narrow" media="all" />
+<style type="text/css">
+* {
+	margin:0;
+	padding:0;
+}
+body {
+    color: #6f4d00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+label {
+	width:100%;
+	float:left;
+	color:#6f4d00;
+}
+h3 {
+    color: #6f4d00;
+    font-family: Archivo Narrow,serif;
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom:10px;
+}
+input[type="text"], textarea, select{
+	width:100%;
+	box-sizing: border-box;
+	padding:5px;
+	border-radius:5px;
+	border: 1px solid #906f34;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #6f4d00;
+	font-size: 14px;
+}
+p{
+	float: left;
+    padding: 10px 0;
+    width: 100%;
+}
+.padding01 {
+	width:100%;
+	height:300px;
+}
+
+input[type="submit"] {
+	color: #eddfa2;
+	float: left;
+	font-size: 14px;
+	padding: 5px 8px;
+	background: #6f4d00;
+	border:none;
+	cursor:pointer;
+	width:100px;
+}
+input[type="submit"]:hover {
+	 opacity:.5; 
+	 transition:all .3s;
+	 -moz-transition:all .3s; 
+	 -o-transition:all .3s; 
+	 -webkit-transition:all .3s;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+function filterState(country_id)
+{
+	$.ajax({
+		type: 'post',
+		url: 'ajax_filter_state.php',
+		data: 'country_id='+country_id,
+		success: function(msg)
+		{
+			$('#state').html(msg);
+		}
+	});
+}
+
+function filter_city(state_id)
+{
+	$.ajax({
+		type: 'post',
+		url: 'ajax_filter_city.php',
+		data: 'state_id='+state_id,
+		success: function(msg)
+		{
+			$('#city').html(msg);
+		}
+	});
+}
+</script>
+</head>
+
+<body>
+  <div class="padding01">
+  <form action="" method="post" enctype="multipart/form-data">
+      <div class="bg07">
+        <h3 align="left">Create Distributor</h3>
+      </div>
+      <div class="border02">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="left" class="bg08" id="divTd"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                  <label><strong>Distributor Name</strong><font color="#FF0000">*</font></label>
+                  <p><input name="distributor_name" type="text" class="text_field01" id="distributor_name" required /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>E-mail :</strong><font color="#FF0000">*</font></label>
+                  <p><input name="email" type="text" class="text_field01" id="email" /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Contact No</strong><font color="#FF0000">*</font></label>
+                  <p><input name="contact_no" type="text" class="text_field01" id="contact_no" required /></p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                  <label><strong>Country</strong><font color="#FF0000">*</font></label>
+                  <p>
+                  <select onChange="filterState(this.value);" class="text_field01" id="country" name="country" required>
+                    <option value="">Select Country</option>
+                  </select>
+                  </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>State</strong><font color="#FF0000">*</font></label>
+                  <p>
+                  <select name="state" id="state" class="text_field01" onChange="filter_city(this.value);" required>
+                  	<option value="">Select State</option>
+                  </select>
+                  </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>City</strong><font color="#FF0000">*</font></label>
+                  <p>
+                  <select name="city" id="city" class="text_field01" required>
+                       <option value="">Select City</option>
+                   </select>
+                  </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Zip / Pin</strong><font color="#FF0000">*</font></label>
+                  <p><input name="zip" type="text" class="text_field01" id="zip" required /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Area</strong><font color="#FF0000">*</font></label>
+                  <p><input name="area" type="text" class="text_field01" id="area" required /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Landmark</strong><font color="#FF0000">*</font></label>
+                  <p><input name="landmark" type="text" class="text_field01" id="landmark" required /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Address</strong><font color="#FF0000">*</font></label>
+                  <p><textarea name="address" type="text" class="text_field01" id="address" required></textarea></p>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                  <label><strong>Vat No</strong></label>
+                  <p><input name="vat_no" type="text" class="text_field01" id="vat_no" /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <label><strong>Cst No</strong></label>
+                  <p><input name="cst_no" type="text" class="text_field01" id="cst_no" /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <p><input name="submit" type="submit" class="submit" id="button" value="Add" /></p>
+                  </td>
+                </tr>
+              </table></td>
+          </tr>
+        </table>
+      </div>
+      </form>
+</div>
+</body>
+</html>

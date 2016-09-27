@@ -1,0 +1,59 @@
+/* ######### Matt Black Strip Main Menu Bar CSS ######### */
+
+.mattblackmenu ul{
+margin: 0;
+padding: 0px 0px 0px 0px;
+color:#FFFFFF; 
+font-size:14px; 
+text-decoration:none; 
+list-style-type: none;
+overflow: hidden;
+width: 900px;
+font-weight:normal;
+float:left;
+height:37px;
+font-family:MyriadPro-Regular;
+}
+
+.mattblackmenu li{
+float:left;
+padding: 0px 5px 0px 5px;
+background:url(../images/nav_division.gif) no-repeat right 0px;
+}
+.mattblackmenu li.last{background:none}
+
+.mattblackmenu li a{
+float: left;
+display: block;
+text-decoration: none;
+margin: 0;
+padding:10px 14px 0px 14px; /*padding inside each tab*/
+/*right divider between tabs*/
+color:#fff;
+font-size:14px;
+
+height:27px;
+text-align:center;
+font-family:MyriadPro-Regular;
+
+}
+
+
+
+
+.mattblackmenu li a:hover, .active{
+color:#ffd871 !important;
+font-size:14px; 
+text-decoration:none;
+background:url(../images/hover_image.gif) no-repeat;
+
+height:27px;
+display:block;
+text-align:center;
+padding:10px 14px 0px 14px ;
+font-weight:normal;
+font-family:MyriadPro-Regular;
+/
+ 
+}
+

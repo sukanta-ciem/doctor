@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Entry Details</title>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #434343;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+a {
+	text-decoration:none;	
+}
+.ifreme_frame {
+	margin: 0 auto;
+    min-height: 400px;
+    overflow: auto;
+    padding: 10px;
+    
+}
+.back_btn {
+	color:#fff;
+	float:right;
+}
+.gree_bar {
+	background-color:#339900;
+	height:20px;
+	margin-bottom:10px;
+	color:#fff;
+	padding:5px 10px;
+}
+td {
+    padding: 0 5px;
+}
+.payment_toptable table td {
+    padding: 0;
+}
+.payment_toptable {
+	width:100%;
+}
+.text_field01 {
+    background: #e7efef;
+    border: 1px solid #819d9d;
+    height: 20px;
+    padding: 2px;
+    width: 150px;
+}
+.text_field02 {
+    background: #e7efef;
+    border: 1px solid #819d9d;
+    height: 18px;
+    padding: 2px;
+    width: 70px;
+}
+.submit {
+    cursor: pointer;
+    width: 130px;
+	margin-bottom:5px;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$( ".datepicker" ).datepicker();
+		$( ".datepicker" ).change(function() {
+			$( ".datepicker" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( ".datepicker" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker1" ).datepicker();
+		$( "#datepicker1" ).change(function() {
+			$( "#datepicker1" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker1" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker2" ).datepicker();
+		$( "#datepicker2" ).change(function() {
+			$( "#datepicker2" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker2" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker3" ).datepicker();
+		$( "#datepicker3" ).change(function() {
+			$( "#datepicker3" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker3" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker4" ).datepicker();
+		$( "#datepicker4" ).change(function() {
+			$( "#datepicker4" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker4" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker5" ).datepicker();
+		$( "#datepicker5" ).change(function() {
+			$( "#datepicker5" ).datepicker( "option", "dateFormat", "d-m-yy" );
+
+			$( "#datepicker5" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker6" ).datepicker();
+		$( "#datepicker6" ).change(function() {
+			$( "#datepicker6" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker6" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker6" ).datepicker();
+		$( "#datepicker6" ).change(function() {
+			$( "#datepicker6" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker6" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker7" ).datepicker();
+		$( "#datepicker7" ).change(function() {
+			$( "#datepicker7" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker7" ).datepicker( "option", "showAnim", "blind" );
+		});
+		$( "#datepicker8" ).datepicker();
+		$( "#datepicker8" ).change(function() {
+			$( "#datepicker8" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( "#datepicker8" ).datepicker( "option", "showAnim", "blind" );
+		});
+	});
+		$( ".datepicker9" ).datepicker();
+		$( ".datepicker9" ).change(function() {
+			$( ".datepicker9" ).datepicker( "option", "dateFormat", "d-m-yy" );
+			$( ".datepicker9" ).datepicker( "option", "showAnim", "blind" );
+		});
+</script>
+</head>
+
+<body>
+<div class="ifreme_frame">
+<div class="gree_bar">Order Details<a class="back_btn" href="sale_order_ar.html">Back</a></div>
+<form action="" method="post" enctype="multipart/form-data" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  	<td align="left" valign="top">
+    <div class="payment_left">
+    Total Order Amount: 27,824.00
+    </div>
+    </td>
+    <td align="right" valign="top">
+    
+    </td>
+  </tr>
+</table>
+<br />
+<div class="payment_toptable">
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%">Order No</td>
+    <td width="50%">AR0000000005</td>
+  </tr>
+  <tr>
+    <td>Date:</td>
+    <td>23-07-2016</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+		<table width="100%" border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>Sl</td>
+				<td>Product Name</td>
+                <td>SKU</td>
+                <td>Distributor Price</td>
+                <td>Oty Ordered</td>
+                <td>Total Price</td>
+                <td align="center">Remove</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Hair Plus Normal</td>
+                <td>100ml pack</td>
+				<td>515.25</td>
+                <td align="center"><input name="qty" onChange="changeProductQty(this.value, '', '', '');" id="qty" type="text" style="width:50px; text-align:center;" value="54" /></td>
+                <td>27823.5</td>
+                <td align="center"><a onclick="removeProduct('', '', '');" href="javascript:void(0)">x</a></td>
+			</tr>
+		</table>
+	</td>
+  </tr>
+</table>
+</div>
+<br />
+<br />
+<div class="payment_toptable">
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+  	<td colspan="2" align="center">Free Oty</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+		<table width="100%" border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>Sl</td>
+				<td>Product Name</td>
+                <td>SKU</td>
+                <td>Free Oty Ordered</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Hair Plus Normal</td>
+                <td>100ml pack</td>
+                <td align="center"><input name="free_qty" onChange="changeProductFreeQty(this.value, '', '', '');" id="free_qty" type="text" style="width:50px; text-align:center;" value="1" /></td>              
+            </tr>
+		</table>
+	</td>
+  </tr>
+</table>
+</div>
+</form>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+function changeProductQty(qty, distributor_price, size_id, orderid)
+{
+	var r=confirm("Do you want to change the Remains Qty '"+qty+"' ?");
+	if(r==true)
+	{
+		var regex=/^[0-9]+$/;
+		if(qty=='')
+		{
+			alert("Enter Oty!");
+			return false;
+		}
+		else if
+		(!qty.match(regex))
+		{
+			alert("Must input numbers");
+			return false;
+		}
+	
+		$.ajax({
+			type: 'post',
+			url: 'ajax_change_qty.php',
+			data: 'orderid='+orderid+'&size_id='+size_id+'&distributor_price='+distributor_price+'&qty='+qty,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					alert("Oty Changed Successfully!");
+					window.location.reload();
+				}
+				else
+				{
+					alert("Error Occured!");
+					window.location.reload();
+				}
+			}
+		});
+	}
+}
+</script>
+
+
+
+
+<script type="text/javascript">
+function changeProductFreeQty(free_qty, distributor_price, size_id, orderid)
+{
+	var r=confirm("Do you want to change the Free Qty '"+free_qty+"' ?");
+	if(r==true)
+	{
+		var regex=/^[0-9]+$/;
+		if(free_qty=='')
+		{
+			alert("Enter Free Oty!");
+			return false;
+		}
+		else if
+		(!free_qty.match(regex))
+		{
+			alert("Must input numbers");
+			return false;
+		}
+	
+		$.ajax({
+			type: 'post',
+			url: 'ajax_change_free_qty.php',
+			data: 'orderid='+orderid+'&size_id='+size_id+'&distributor_price='+distributor_price+'&free_qty='+free_qty,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					alert("Free Oty Changed Successfully!");
+					window.location.reload();
+				}
+				else
+				{
+					alert("Error Occured!");
+					window.location.reload();
+				}
+			}
+		});
+	}
+}
+</script>
+
+
+
+
+<script type="text/javascript">
+function removeProduct(distributor_price, size_id, orderid)
+{
+	var r=confirm("Do you really want to remove this Item ?");
+	if(r==true)
+	{
+		$.ajax({
+			type: 'post',
+			url: 'ajax_remove_order_product.php',
+			data: 'orderid='+orderid+'&size_id='+size_id+'&distributor_price='+distributor_price,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					alert("Item removeed Successfully!");
+					window.location.reload();
+				}
+				else
+				{
+					alert("Error Occured!");
+					window.location.reload();
+				}
+			}
+		});
+	}
+}
+</script>

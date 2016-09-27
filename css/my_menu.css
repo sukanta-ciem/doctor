@@ -1,0 +1,405 @@
+.menu_header {
+/*	background-color:#fff;
+	background-color:rgba(0, 0, 0, 0.7);*/
+}
+.header_nav_frm {
+	text-align: center;
+	width: 100%;
+}
+.header_nav {
+	display: inline-block;
+	text-align:left;
+}
+#cssmenu {
+	position: relative;
+	width: auto;
+}
+#cssmenu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	line-height: 1;
+}
+#cssmenu > ul {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+#cssmenu.align-right > ul > li {
+	float: right;
+}
+#cssmenu.align-center ul {
+	text-align: center;
+}
+#cssmenu.align-center ul ul {
+	text-align: left;
+}
+#cssmenu > ul > li {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	float: left;
+	color: #354a9f;
+	font-size: 14px;
+}
+#cssmenu > ul > #menu-button {
+	display: none;
+}
+#cssmenu ul li a {
+	display: block;
+}
+#cssmenu > ul > li > a {
+	color: #9B7022;
+	font-size: 14px;
+	font-weight: bold;
+	/*margin-right: 5px;*/
+
+	/*line-height: 28px;*/
+
+    padding: 10px 20px;
+	position: relative;
+	z-index: 506;
+}
+#cssmenu > ul > li > a > span {
+}
+#cssmenu > ul > li > a > strong {
+	padding-right:5px;
+	color:#999;
+}
+#cssmenu > ul > li:hover > ul li a strong {
+	padding-right:5px;
+	color:#999;
+}
+#cssmenu > ul > li:hover > a {
+}
+#cssmenu ul li:hover > ul {
+	background: rgba(0, 0, 0, 0.7);
+}
+.other #cssmenu ul li:hover > ul {
+	background: rgba(0, 0, 0, 0.9);
+}
+#indicatorContainer {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	overflow: hidden;
+	z-index: -1;
+	background-color:#000;
+}
+#pIndicator {
+	position: absolute;
+	height: 0;
+	width: 100%;
+	border: 12px solid transparent;
+	border-top-color: #2b2f3a;
+	z-index: -2;
+}
+#cIndicator {
+	position: absolute;
+	height: 0;
+	width: 100%;
+	border: 12px solid transparent;
+	border-top-color: #2b2f3a;
+	top: -12px;
+	right: 100%;
+	z-index: -2;
+}
+#cssmenu ul ul {
+	position: absolute;
+	left: -9999px;
+	top: 70px;
+	opacity: 0;
+	z-index: 1000;
+}
+#cssmenu ul ul ul {
+	top: 37px;
+}
+#cssmenu ul ul li {
+	position: relative;
+}
+#cssmenu > ul > li:hover > ul {
+	left: auto;
+	top: 100%;
+	opacity: 1;
+	width: 180px;
+}
+#cssmenu > ul > li.right_level_menu:hover > ul {
+	left: inherit;
+	opacity: 1;
+	right: 0;
+	top: 100%;
+}
+#cssmenu.align-right > ul > li:hover > ul {
+	left: auto;
+	right: 0;
+	opacity: 1;
+}
+#cssmenu ul ul li:hover > ul {
+	right: 100%;
+	opacity: 1;
+	top: 0;
+	left: inherit;
+}
+#cssmenu.align-right ul ul li:hover > ul {
+	left: auto;
+	right: 170px;
+	top: 0;
+	opacity: 1;
+	padding-right: 5px;
+}
+#cssmenu ul ul li a {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 15px 20px;
+	font-size: 14px;
+	color: #724700;
+	white-space: nowrap;
+	font-weight:bold;
+}
+#cssmenu.align-right ul ul li a {
+	text-align: right;
+}
+#cssmenu ul ul li:hover > a {
+	color: #330000;
+	background: rgba(0, 0, 0, 0.95);
+}
+#cssmenu ul li a:hover,  #cssmenu ul ul li:hover > a {
+	color:#724700;
+}
+#cssmenu ul ul li:last-child > a,  #cssmenu ul ul li.last > a {
+	border-bottom: 0;
+}
+#cssmenu > ul > li.last:hover ul {
+	left: auto;
+	opacity: 1;
+	right: 0;
+	top: 100%;
+}
+ @media only screen and (min-width: 1024px) {
+#cssmenu > ul > li {
+	border-radius:15px 15px 0 0;
+	margin-left: 1px;
+}
+#cssmenu > ul > li:hover > a {
+	color: #83580a;
+}
+.free_cons #cssmenu > ul > li {
+	background:none;
+}
+#cssmenu > ul > li:hover > ul {
+
+
+	border-top-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+#cssmenu > ul > li.last:hover > ul {
+	border-top-left-radius: 25px;
+	border-top-right-radius: 0px;
+}
+#cssmenu > ul > li:hover > ul li:first-child:hover > a {
+	border-top-right-radius: 25px;
+}
+#cssmenu > ul > li:hover > ul li:last-child:hover > a {
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+#cssmenu > ul > li.last:hover ul li:first-child:hover > a {
+	border-top-right-radius: 0px;
+	border-top-left-radius: 25px;
+}
+#cssmenu > ul > li,  #cssmenu > ul > li:hover > ul {
+	background-color:rgba(216, 165, 75, 0.7);
+}
+#cssmenu > ul > li:hover > ul li:hover > a {
+	background-color:#DFC070;
+}
+/*#cssmenu > ul > li:nth-child(4),  #cssmenu > ul > li:nth-child(4):hover > ul {
+	background-color:#a7c19d;
+}
+#cssmenu > ul > li:nth-child(4):hover > ul li:hover > a {
+	background-color:#708368;
+}
+#cssmenu > ul > li:nth-child(5),  #cssmenu > ul > li:nth-child(5):hover > ul {
+	background-color:#f1a049;
+}
+#cssmenu > ul > li:nth-child(5):hover > ul li:hover > a {
+	background-color:#9a6021;
+}
+#cssmenu > ul > li:nth-child(6),  #cssmenu > ul > li:nth-child(6):hover > ul {
+	background-color:#f1d733;
+}
+#cssmenu > ul > li:nth-child(6):hover > ul li:hover > a {
+	background-color:#b49e14;
+}
+#cssmenu > ul > li:nth-child(7),  #cssmenu > ul > li:nth-child(7):hover > ul {
+	background-color:#70c4d2;
+}
+#cssmenu > ul > li:nth-child(7):hover > ul li:hover > a {
+	background-color:#188496;
+}
+#cssmenu > ul > li:nth-child(8),  #cssmenu > ul > li:nth-child(8):hover > ul {
+	background-color:#ec7269;
+}
+#cssmenu > ul > li:nth-child(8):hover > ul li:hover > a {
+	background-color:#a72920;
+}*/
+}
+ @media only screen and (max-width: 1023px) {
+.body_content {
+	margin-top: 0;
+}
+body.other .menu_header {
+	position:static;
+}
+.map_atea {
+	width: 100%;
+	float:left;
+	height: 250px;
+}
+.header_details_frame {
+	display: none;
+}
+.menu-inner .brand {
+	width:100%;
+	text-align: center;
+}
+.header_nav {
+	height: 45px;
+	float: left;
+	width: 100%;
+}
+#cssmenu {
+	width: auto;
+	background-color:#CE9D46;
+	border: 1px solid #CE9D46;
+	border-radius: 5px;
+}
+#cssmenu:hover {
+/*background-color:#354A9F;*/
+
+  }
+#cssmenu.align-center ul {
+	text-align: left;
+}
+#cssmenu.align-right > ul > li {
+	float: none;
+}
+#cssmenu ul {
+	width: auto;
+}
+#cssmenu > ul > li {
+/*background-color: #32448a;*/
+
+  }
+#cssmenu .submenuArrow,  #cssmenu #indicatorContainer {
+	display: none;
+}
+#cssmenu > ul {
+	height: auto;
+	display: block;
+}
+#cssmenu > ul > li {
+	float: none;
+}
+#cssmenu li,  #cssmenu > ul > li {
+	display: none;
+}
+#cssmenu ul ul,  #cssmenu ul ul ul,  #cssmenu ul > li:hover > ul,  #cssmenu ul ul > li:hover > ul,  #cssmenu.align-right ul ul,  #cssmenu.align-right ul ul ul,  #cssmenu.align-right ul > li:hover > ul,  #cssmenu.align-right ul ul > li:hover > ul {
+	position: relative;
+	left: auto;
+	top: auto;
+	opacity: 1;
+	padding-left: 0;
+	padding-right: 0;
+	right: auto;
+}
+#cssmenu ul .has-sub::after {
+	display: none;
+}
+#cssmenu ul li a {
+	padding: 5px 20px;
+}
+#cssmenu ul ul li a {
+	border: 0;
+	background: none;
+	width: auto;
+	padding: 8px 35px;
+}
+#cssmenu.align-right ul ul li a {
+	text-align: left;
+}
+#cssmenu ul ul li:hover > a {
+	background: none;
+	color: #724700;
+}
+#cssmenu ul ul ul a {
+	padding: 8px 50px;
+}
+#cssmenu ul ul ul ul a {
+	padding: 8px 65px;
+}
+#cssmenu ul ul ul ul ul a {
+	padding: 8px 80px;
+}
+#cssmenu ul ul ul ul ul ul a {
+	padding: 8px 95px;
+}
+#cssmenu > ul > #menu-button {
+	display: block;
+	cursor: pointer;
+}
+#cssmenu #menu-button > a {
+	padding: 5px 20px;
+}
+#cssmenu ul.open li,  #cssmenu > ul.open > li {
+	display: block;
+}
+#cssmenu > ul.open > li#menu-button > a {
+	color: #724700;
+	border-bottom: 1px solid rgba(150, 150, 150, 0.1);
+}
+#cssmenu ul ul:after {
+	display: none;
+}
+#cssmenu #menu-button:after {
+	display: block;
+	content: '';
+	position: absolute;
+	height: 3px;
+	width: 22px;
+	border-top: 2px solid #9b7022;
+	border-bottom: 2px solid #9b7022;
+	right: 10px;
+	top: 6px;
+	box-sizing:content-box;
+}
+#cssmenu #menu-button:before {
+	display: block;
+	content: '';
+	position: absolute;
+	height: 3px;
+	width: 22px;
+	border-top: 2px solid #9b7022;
+	right: 10px;
+	top: 16px;
+	box-sizing:content-box;
+}
+#cssmenu #menu-button:hover:after,  #cssmenu #menu-button:hover:before {
+	border-color: #724700;
+}
+#cssmenu ul.open #menu-button:after,  #cssmenu ul.open #menu-button:before {
+	border-color: #724700;
+}
+.header-nav {
+	float: left;
+	margin: 10px 0 0;
+	width: 100%;
+}
+#cssmenu ul li:hover > ul {
+	background: none;
+}
+#cssmenu > ul > li > a,  #cssmenu ul ul li a {
+	color: #9b7022;
+}
+}
