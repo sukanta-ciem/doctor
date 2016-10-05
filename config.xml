@@ -18,5 +18,6 @@
   </author>
   
   <access uri="http://arishbionaturals.com" subdomains="true" />
+  <access origin="*" subdomains="true" />
 
 </widget>
