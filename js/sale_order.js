@@ -7,6 +7,7 @@ $(document).ready(function(){
 });
 
 function addInList(){
+	setTimeout(function(){ document.getElementById("wrapper").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
 	if(ordet === null || typeof ordet === typeof undefined){
 		var or_det = [];
@@ -142,4 +143,8 @@ function addProQty(product_qty)
 		alert("Must input numbers");
 		$("#product_qty").val('');
 	}
+}
+
+function addSaleOrder(){
+	window.location.href = "sale_order_ar.html";
 }
