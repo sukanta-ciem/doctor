@@ -147,56 +147,5 @@ display:none !important;
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/backbone.js"></script>
-<script>
-	document.getElementById("submit").addEventListener("click", showLoader);
-	(function() {
-	   // your page initialization code here
-	   // the DOM will be available here
-		document.getElementById("wrapper").className = "";
-		setTimeout(function(){ document.getElementById("wrapper").className = "hidden"; }, 2000);
-	})();
-	
-	function showLoader(){
-		var u = document.getElementById("textfield").value;
-		var p = document.getElementById("textfield2").value;
-		if(u==="" || p===""){
-			alert("Fill up the required field!");
-			return false;
-		}
-		document.getElementById("wrapper").className = "";
-		var formData = $("#loginForm").serializeArray();
-		$.ajax({
-			type: 'post',
-			url: site_url+'api/login_api.php',
-			data: formData,
-			success: function(msg){
-				var data = JSON.parse(msg);
-				if(data.status === "success"){
-					var user_id = data.user_id;
-					localStorage.setItem("loggedIn", "ok");
-					localStorage.setItem("user_id", user_id);
-					localStorage.setItem("username", u);
-					$.ajax({
-						type: 'post',
-						url: site_url+'api/distributor_api.php',
-						data: "user="+u,
-						success: function(msg){
-							var data = JSON.parse(msg);
-							if(data.status === "success"){
-								var distributor_details = JSON.stringify(data.distributor);
-								localStorage.setItem("distributor_details", distributor_details);
-								window.location.href = "sale_order_ar.html";								
-							}else{
-								/////do nothing
-							}
-						}
-					});
-				}else{
-					alert("Wrong Username or Password!");
-				}
-			}
-		});
-	}
-</script>
 </body>
 </html>
