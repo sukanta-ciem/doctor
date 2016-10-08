@@ -16,7 +16,8 @@
   <author href="https://build.phonegap.com" email="support@phonegap.com">
       Sukanta Das Bairagya
   </author>
-  
+  <plugin name="cordova-plugin-whitelist" spec="1" />
   <access origin="*" subdomains="true" />
+  <allow-navigation href="*" />
 
 </widget>
