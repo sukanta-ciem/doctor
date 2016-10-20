@@ -7,7 +7,8 @@ $(document).ready(function(){
 });
 
 function addInList(){
-	setTimeout(function(){ document.getElementById("wrapper").className = "hidden"; }, 2000);
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
 	if(ordet === null || typeof ordet === typeof undefined){
 		var or_det = [];
@@ -37,7 +38,22 @@ function addInList(){
 	if(orderHtml.length>0){
 		$("#orderView").find("tbody").html(orderHtml.join(""));
 	}
+	
+	var distributor_name = $("#distributor_name").val();
+	var cred_amnt = $("#credit_note").val();
+	var email = $("#email").val();
+	var contact_no = $("#contact_no").val();
+	var special_distributor = $("#special_distributor").val();
+	var dist_id = $("#distributor_id").val();
+	
 	document.getElementById("orderForm").reset();
+	
+	$("#distributor_name").val(distributor_name);
+	$("#credit_note").val(cred_amnt);
+	$("#email").val(email);
+	$("#contact_no").val(contact_no);
+	$("#special_distributor").val(special_distributor);
+	$("#distributor_id").val(dist_id);
 }
 
 function changeDistributorName()
@@ -143,8 +159,4 @@ function addProQty(product_qty)
 		alert("Must input numbers");
 		$("#product_qty").val('');
 	}
-}
-
-function addSaleOrder(){
-	window.location.href = "sale_order_ar.html";
 }
