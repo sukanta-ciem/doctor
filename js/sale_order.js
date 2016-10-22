@@ -56,6 +56,11 @@ function addInList(){
 	$("#distributor_id").val(dist_id);
 }
 
+function addSaleOrder()
+{
+	window.location.href = "sale_order_ar.html";
+}
+
 function changeDistributorName()
 {
 	$("#qty_id").val('');
