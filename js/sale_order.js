@@ -1,3 +1,5 @@
+var site_url = "http://www.arishbionaturals.com/sales/";
+//var site_url = "http://localhost/sales/";
 var addInStock = true;
 var order_no = parseInt(localStorage.getItem("order_no")) + 1;
 
@@ -5,6 +7,38 @@ $(document).ready(function(){
 	$("#order_no").val(order_no);
 	$("#order_no_invalid_process").val(order_no);
 });
+
+function sync(){
+	document.getElementById("wrappers").className = "";
+	var order_details = localStorage.getItem("order_details");
+	var order = JSON.parse(order_details);
+	if(order_details === null || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
+		alert("There is no data to Sync!");
+		window.location.href = "sale_order_ar.html";
+	}
+	$.ajax({
+		type: 'post',
+		url: site_url+'api/order_api.php',
+		data: "order="+order_details,
+		success: function(msg){
+			console.log(msg);
+			var data = JSON.parse(msg);
+			if(data.status === "success"){
+				var order_details = JSON.stringify(data.order_details);
+				localStorage.setItem("order_details", order_details);
+				alert("Synced Successfully");
+				window.location.href = "sale_order_ar.html";								
+			}else{
+				alert("Error Occurred!");
+				window.location.href = "sale_order_ar.html";
+			}
+		},
+	    error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert('No Active network Connection is present!');
+			window.location.href = "sale_order_ar.html";
+	    }
+	});
+}
 
 function addInList(){
 	document.getElementById("wrappers").className = "";
@@ -56,7 +90,7 @@ function addInList(){
 	
 	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
 	
-	if(ordet === null || typeof ordet === typeof undefined){
+	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
 		var proName = $("#prod_id").val();
 		var product_qty = $("#product_qty").val();
@@ -207,7 +241,7 @@ function addSaleOrder()
 	
 	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
 	
-	if(ordet === null || typeof ordet === typeof undefined){
+	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
 		var proName = $("#prod_id").val();
 		var product_qty = $("#product_qty").val();
