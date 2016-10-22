@@ -36,7 +36,7 @@ function addInList(){
 		orderHtml.push("</tr>");
 	}
 	if(orderHtml.length>0){
-		$("#orderView").find("tbody").html(orderHtml.join(""));
+		$("#orderView").find("tbody").append(orderHtml.join(""));
 	}
 	
 	var distributor_name = $("#distributor_name").val();
