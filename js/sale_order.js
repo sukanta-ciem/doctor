@@ -10,6 +10,52 @@ function addInList(){
 	document.getElementById("wrappers").className = "";
 	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
+	var d = new Date();
+	var dd = d.getDate();
+	var mm = d.getMonth()+1; //January is 0!
+	
+	var yyyy = d.getFullYear();
+	if(dd<10){
+		dd='0'+dd
+	} 
+	if(mm<10){
+		mm='0'+mm
+	} 
+	var today = yyyy+'-'+mm+'-'+dd;
+	var h = d.getHours();
+	var m = d.getMinutes();
+	var s = d.getSeconds();
+	var totime = h+':'+m+':'+s;
+	
+	var distributor_name = $("#distributor_name").val();
+	var cred_amnt = $("#credit_note").val();
+	var email = $("#email").val();
+	var contact_no = $("#contact_no").val();
+	var special_distributor = $("#special_distributor").val();
+	var dist_id = $("#distributor_id").val();
+	var delivery_date = $("#datepicker1").val();
+	
+	var product_id = $("#product_id").val();
+	var product_mf_id = $("#product_mf_id").val();
+	var size_id = $("#qty_id").val();
+	var qty = $("#product_qty").val();
+	var free_qty = $("#free_qty").val();
+	var ean_no = $("#ean_no").val();
+	var mrp = $("#mrp").val();
+	var base_purchase_price = $("#base_purchase_price").val();
+	var distributor_unit_price = $("#distributor_unit_price").val();
+	var vat_percentage_inp = $("#vat_percentage_inp").val();
+	var vat_amnt_inp = $("#vat_amnt_inp").val();
+	var cst_percentage_inp = $("#cst_percentage_inp").val();
+	var cst_amnt_inp = $("#cst_amnt_inp").val();
+	var exise_state_percentage_inp = $("#exise_state_percentage_inp").val();
+	var exise_state_amnt_inp = $("#exise_state_amnt_inp").val();
+	var exise_central_percentage_inp = $("#exise_central_percentage_inp").val();
+	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
+	var distributor_price = $("#distributor_price").val();
+	
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
+	
 	if(ordet === null || typeof ordet === typeof undefined){
 		var or_det = [];
 		var proName = $("#prod_id").val();
@@ -19,32 +65,86 @@ function addInList(){
 			alert("Enter Product Quantity!");
 			return false;
 		}else{
-			var one_order = [proName, distributor_price, product_qty, 0];
-			or_det.push(one_order);
+			var orderDetails = {
+				"order_no" : order_no,
+				"order_date" : today,
+				"order_time" : totime,
+				"distributor_id" : dist_id,
+				"upload_id" : user,
+				"billing_name" : distributor_name,
+				"billing_contact_no" : contact_no,
+				"billing_email" : email,
+				"delivery_date" : delivery_date,
+				"order_placed" : "N",
+				"details" : []
+			};
+			var ordTls = orderDetails.details;
+			ordTls.push(one_order_det);
+			or_det.push(orderDetails);
+			or_det_string = JSON.stringify(or_det);
+			localStorage.setItem("order_details", or_det_string);
+			localStorage.setItem("order_no", order_no);
 		}
 	}else{
 		var or_det = JSON.parse(ordet);
-	}
-	var orderHtml = [];
-	
-	for(var i=0; i<or_det.length; i++){
-		orderHtml.push("<tr>");
-		var singleOrder = or_det[i];
-		for(var j=0; j<singleOrder.length; j++){
-			orderHtml.push('<td align="center" class="bg06">'+singleOrder[j]+'</td>');
+		if(product_qty === "" || product_qty === 0){
+			alert("Enter Product Quantity!");
+			return false;
+		}else{
+			var already_not_exist = true;
+			for(var j = 0; j<or_det.length; j++)
+			{
+				if(or_det[j].order_no===order_no){
+					already_not_exist = false;
+					var prev_order_details = or_det[j].details;
+					prev_order_details.push(one_order_det);
+					or_det[j].details = prev_order_details;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+				}
+			}
+			
+			if(already_not_exist){
+				var orderDetails = {
+					"order_no" : order_no,
+					"order_date" : today,
+					"order_time" : totime,
+					"distributor_id" : dist_id,
+					"upload_id" : user,
+					"billing_name" : distributor_name,
+					"billing_contact_no" : contact_no,
+					"billing_email" : email,
+					"delivery_date" : delivery_date,
+					"order_placed" : "N",
+					"details" : []
+				};
+				var ordTls = orderDetails.details;
+				ordTls.push(one_order_det);
+				or_det.push(orderDetails);
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				localStorage.setItem("order_no", order_no);
+			}
 		}
-		orderHtml.push("</tr>");
+	}
+	
+	var orderHtml = [];
+	for(var i=0; i<or_det.length; i++){
+		var singleOrderArray = or_det[i].details;
+		if(or_det[i].order_no === order_no){
+			for(var j=0; j<singleOrderArray.length; j++){
+				orderHtml.push("<tr>");
+				var singleOrder = singleOrderArray[j];
+				for(var l=0; j<singleOrder.length; j++){
+					orderHtml.push('<td align="center" class="bg06">'+singleOrder[l]+'</td>');
+				}
+				orderHtml.push("</tr>");
+			}
+		}
 	}
 	if(orderHtml.length>0){
 		$("#orderView").find("tbody").append(orderHtml.join(""));
 	}
-	
-	var distributor_name = $("#distributor_name").val();
-	var cred_amnt = $("#credit_note").val();
-	var email = $("#email").val();
-	var contact_no = $("#contact_no").val();
-	var special_distributor = $("#special_distributor").val();
-	var dist_id = $("#distributor_id").val();
 	
 	document.getElementById("orderForm").reset();
 	
@@ -58,6 +158,129 @@ function addInList(){
 
 function addSaleOrder()
 {
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+	var ordet = localStorage.getItem("order_details");
+	var d = new Date();
+	var dd = d.getDate();
+	var mm = d.getMonth()+1; //January is 0!
+	
+	var yyyy = d.getFullYear();
+	if(dd<10){
+		dd='0'+dd
+	} 
+	if(mm<10){
+		mm='0'+mm
+	} 
+	var today = yyyy+'-'+mm+'-'+dd;
+	var h = d.getHours();
+	var m = d.getMinutes();
+	var s = d.getSeconds();
+	var totime = h+':'+m+':'+s;
+	
+	var distributor_name = $("#distributor_name").val();
+	var cred_amnt = $("#credit_note").val();
+	var email = $("#email").val();
+	var contact_no = $("#contact_no").val();
+	var special_distributor = $("#special_distributor").val();
+	var dist_id = $("#distributor_id").val();
+	var delivery_date = $("#datepicker1").val();
+	
+	var product_id = $("#product_id").val();
+	var product_mf_id = $("#product_mf_id").val();
+	var size_id = $("#qty_id").val();
+	var qty = $("#product_qty").val();
+	var free_qty = $("#free_qty").val();
+	var ean_no = $("#ean_no").val();
+	var mrp = $("#mrp").val();
+	var base_purchase_price = $("#base_purchase_price").val();
+	var distributor_unit_price = $("#distributor_unit_price").val();
+	var vat_percentage_inp = $("#vat_percentage_inp").val();
+	var vat_amnt_inp = $("#vat_amnt_inp").val();
+	var cst_percentage_inp = $("#cst_percentage_inp").val();
+	var cst_amnt_inp = $("#cst_amnt_inp").val();
+	var exise_state_percentage_inp = $("#exise_state_percentage_inp").val();
+	var exise_state_amnt_inp = $("#exise_state_amnt_inp").val();
+	var exise_central_percentage_inp = $("#exise_central_percentage_inp").val();
+	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
+	var distributor_price = $("#distributor_price").val();
+	
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
+	
+	if(ordet === null || typeof ordet === typeof undefined){
+		var or_det = [];
+		var proName = $("#prod_id").val();
+		var product_qty = $("#product_qty").val();
+		var distributor_price = $("#distributor_price").val();
+		if(product_qty === "" || product_qty === 0){
+			alert("Enter Product Quantity!");
+			return false;
+		}else{
+			var orderDetails = {
+				"order_no" : order_no,
+				"order_date" : today,
+				"order_time" : totime,
+				"distributor_id" : dist_id,
+				"upload_id" : user,
+				"billing_name" : distributor_name,
+				"billing_contact_no" : contact_no,
+				"billing_email" : email,
+				"delivery_date" : delivery_date,
+				"order_placed" : "Y",
+				"details" : []
+			};
+			var ordTls = orderDetails.details;
+			ordTls.push(one_order_det);
+			or_det.push(orderDetails);
+			or_det_string = JSON.stringify(or_det);
+			localStorage.setItem("order_details", or_det_string);
+			localStorage.setItem("order_no", order_no);
+		}
+	}else{
+		var or_det = JSON.parse(ordet);
+		if(product_qty === "" || product_qty === 0){
+			alert("Enter Product Quantity!");
+			return false;
+		}else{
+			var already_not_exist = true;
+			for(var j = 0; j<or_det.length; j++)
+			{
+				if(or_det[j].order_no===order_no){
+					already_not_exist = false;
+					or_det[j].order_placed = "Y";
+					var prev_order_details = or_det[j].details;
+					prev_order_details.push(one_order_det);
+					or_det[j].details = prev_order_details;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+				}
+			}
+			
+			if(already_not_exist){
+				var orderDetails = {
+					"order_no" : order_no,
+					"order_date" : today,
+					"order_time" : totime,
+					"distributor_id" : dist_id,
+					"upload_id" : user,
+					"billing_name" : distributor_name,
+					"billing_contact_no" : contact_no,
+					"billing_email" : email,
+					"delivery_date" : delivery_date,
+					"order_placed" : "Y",
+					"details" : []
+				};
+				var ordTls = orderDetails.details;
+				ordTls.push(one_order_det);
+				or_det.push(orderDetails);
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				localStorage.setItem("order_no", order_no);
+			}
+		}
+	}
+	
+	
 	window.location.href = "sale_order_ar.html";
 }
 
@@ -106,6 +329,7 @@ function fetch_data(prod_name)
 		for(var i=0; i<product_details.length; i++){
 			if(product_details[i].other_detail.product_id === prod_id){
 				var product_mf_id = product_details[i].other_detail.product_mf_id;
+				var product_id = product_details[i].other_detail.product_id;
 				var qty_id = product_details[i].other_detail.qty;
 				var sku = product_details[i].other_detail.sku;
 				var mrp = product_details[i].other_detail.mrp;
@@ -123,6 +347,7 @@ function fetch_data(prod_name)
 				var ean_no = product_details[i].other_detail.ean_no;
 				
 				$("#product_mf_id").val(product_mf_id);
+				$("#product_id").val(product_id);
 				$("#qty_id").val(qty_id);
 				$("#sku").val(sku);
 				$("#mrp").val(mrp);
