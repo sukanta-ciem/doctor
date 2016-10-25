@@ -61,6 +61,8 @@ function addInList(){
 	var s = d.getSeconds();
 	var totime = h+':'+m+':'+s;
 	
+	var proName = $("#prod_id").val().split("#");
+	
 	var distributor_name = $("#distributor_name").val();
 	var cred_amnt = $("#credit_note").val();
 	var email = $("#email").val();
@@ -92,9 +94,7 @@ function addInList(){
 	
 	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
-		var proName = $("#prod_id").val();
 		var product_qty = $("#product_qty").val();
-		var distributor_price = $("#distributor_price").val();
 		if(product_qty === "" || product_qty === 0){
 			alert("Enter Product Quantity!");
 			return false;
@@ -163,19 +163,13 @@ function addInList(){
 	}
 	
 	var orderHtml = [];
-	for(var i=0; i<or_det.length; i++){
-		var singleOrderArray = or_det[i].details;
-		if(or_det[i].order_no === order_no){
-			for(var j=0; j<singleOrderArray.length; j++){
-				orderHtml.push("<tr>");
-				var singleOrder = singleOrderArray[j];
-				for(var l=0; j<singleOrder.length; j++){
-					orderHtml.push('<td align="center" class="bg06">'+singleOrder[l]+'</td>');
-				}
-				orderHtml.push("</tr>");
-			}
-		}
-	}
+	orderHtml.push("<tr>");
+	orderHtml.push('<td align="center" class="bg06">'+proName[0]+'</td>');
+	orderHtml.push('<td align="center" class="bg06">'+distributor_price+'</td>');
+	orderHtml.push('<td align="center" class="bg06">'+qty+'</td>');
+	orderHtml.push('<td align="center" class="bg06">'+free_qty+'</td>');
+	orderHtml.push("</tr>");
+	
 	if(orderHtml.length>0){
 		$("#orderView").find("tbody").append(orderHtml.join(""));
 	}
