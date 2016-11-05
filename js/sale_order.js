@@ -2,6 +2,7 @@ var site_url = "http://www.arishbionaturals.com/sales/";
 //var site_url = "http://localhost/sales/";
 var addInStock = true;
 var order_no = parseInt(localStorage.getItem("order_no")) + 1;
+var order_count = 0;
 
 $(document).ready(function(){
 	$("#order_no").val(order_no);
@@ -71,6 +72,7 @@ function addInList(){
 	var dist_id = $("#distributor_id").val();
 	var delivery_date = $("#datepicker1").val();
 	
+	var sku = $("#sku").val();
 	var product_id = $("#product_id").val();
 	var product_mf_id = $("#product_mf_id").val();
 	var size_id = $("#qty_id").val();
@@ -90,7 +92,7 @@ function addInList(){
 	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
 	var distributor_price = $("#distributor_price").val();
 	
-	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count];
 	
 	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
@@ -163,18 +165,21 @@ function addInList(){
 	}
 	
 	var orderHtml = [];
-	orderHtml.push("<tr>");
-	orderHtml.push('<td align="center" class="bg06">'+proName[0]+'</td>');
+	orderHtml.push('<tr id="row_'+order_count+'">');
+	orderHtml.push('<td align="center" class="bg06">'+proName[0]+'<br>(Weight: '+sku+')</td>');
 	orderHtml.push('<td align="center" class="bg06">'+distributor_price+'</td>');
 	orderHtml.push('<td align="center" class="bg06">'+qty+'</td>');
 	orderHtml.push('<td align="center" class="bg06">'+free_qty+'</td>');
+	orderHtml.push('<td align="center" class="bg06"><a style="text-decoration:none;" onClick="removeProduct('+order_no+','+order_count+');" href="javascript:void(0)">x</a></td>');
 	orderHtml.push("</tr>");
 	
 	if(orderHtml.length>0){
 		$("#orderView").find("tbody").append(orderHtml.join(""));
+		$("#orderView").find("tfoot").show();
 	}
 	
 	document.getElementById("orderForm").reset();
+	order_count++;
 	
 	$("#distributor_name").val(distributor_name);
 	$("#credit_note").val(cred_amnt);
@@ -182,6 +187,58 @@ function addInList(){
 	$("#contact_no").val(contact_no);
 	$("#special_distributor").val(special_distributor);
 	$("#distributor_id").val(dist_id);
+}
+
+function removeProduct(order_no1, order_count){
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+	var ordet = localStorage.getItem("order_details");
+	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		alert("Error Occured!");
+	}else{
+		var or_det = JSON.parse(ordet);
+		for(var i = 0; i<or_det.length; i++)
+		{
+			if(or_det[i].order_no===order_no1){
+				var prev_order_details = or_det[i].details;
+				for(var j=0; j<prev_order_details.length; j++)
+				{
+					var prev_one_order = prev_order_details[j];
+					if(prev_one_order[19]===order_count){
+						prev_order_details.splice(j, 1);
+					}
+				}
+				
+				or_det[i].details = prev_order_details;
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				$("#row_"+order_count).remove();
+				alert("Product Removed Successfully!");
+			}
+		}
+	}
+}
+
+function addSaleOrderQuick()
+{
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+	var ordet = localStorage.getItem("order_details");
+	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		alert("Error Occured!");
+	}else{
+		var or_det = JSON.parse(ordet);
+		for(var i = 0; i<or_det.length; i++)
+		{
+			if(or_det[i].order_no===order_no){
+				or_det[i].order_placed = "Y";
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				alert("Order Placed Successfully!");
+			}
+		}
+	}
+	window.location.href = "sale_order_ar.html";
 }
 
 function addSaleOrder()
@@ -214,6 +271,7 @@ function addSaleOrder()
 	var dist_id = $("#distributor_id").val();
 	var delivery_date = $("#datepicker1").val();
 	
+	var sku = $("#sku").val();
 	var product_id = $("#product_id").val();
 	var product_mf_id = $("#product_mf_id").val();
 	var size_id = $("#qty_id").val();
@@ -233,7 +291,7 @@ function addSaleOrder()
 	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
 	var distributor_price = $("#distributor_price").val();
 	
-	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price];
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count];
 	
 	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
