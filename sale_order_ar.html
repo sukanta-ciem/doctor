@@ -117,7 +117,7 @@ display:none !important;
     	<div class="others_content">
         <h2 class="spl_h2">Add Sale Order (A.R)&nbsp;&nbsp;</h2>
         <div class="others_content_in" style="height:auto;">
-            <form action="" method="post" enctype="multipart/form-data" id="orderForm">
+            <form action="" method="post" enctype="multipart/form-data" id="orderForm" onsubmit="javascript: return false;">
               <input type="hidden" name="orderid" value="" />
               <table class="distributor_from distributor_from2 sale_ord_arn" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -262,16 +262,17 @@ display:none !important;
                       <td align="center" class="bg05"><strong>Distributor Price</strong></td>
                       <td align="center" class="bg05"><strong>Qty</strong></td>
                       <td align="center" class="bg05"><strong>Free Qty</strong></td>
+					  <td align="center" class="bg05"><strong>Remove</strong></td>
                     </tr>
 				</thead>
 				<tbody>
-					<tr>
-                      <td align="center" class="bg06"></td>
-                      <td align="center" class="bg06"></td>
-                      <td align="center" class="bg06"></td>
-                      <td align="center" class="bg06"></td>
-                    </tr>
+					
                  </tbody>
+				 <tfoot style="display:none">
+				 	<tr>
+                      <td align="right" class="bg06" colspan="8"><input style="margin-left:10px; float:initial; padding: 5px 4px; margin:10px;" name="add_quick_order" type="button" class="distributor_from_btn" id="addSaleQuick" value="Add Sale Order" onclick="addSaleOrderQuick();" /></td>
+                    </tr>
+				 </tfoot>
         	</table>
             </form>
             <div class="clear"></div>
