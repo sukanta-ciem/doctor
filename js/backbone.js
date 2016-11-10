@@ -1,5 +1,5 @@
-//var site_url = "http://www.arishbionaturals.com/sales/";
-var site_url = "http://localhost/sales/";
+var site_url = "http://www.arishbionaturals.com/sales/";
+//var site_url = "http://localhost/sales/";
 
 $(document).ready(function(){
 	var order_no = localStorage.getItem("order_no");
