@@ -369,7 +369,8 @@ function addSaleOrderQuick()
 				{
 					var one_order = order_details[j];
 					var one_total = parseFloat(one_order[17])*parseInt(one_order[3]);
-					total_order_amount += one_total;
+					one_total = one_total.toFixed(2);
+					total_order_amount += parseFloat(one_total);
 					product_html.push('<tr id="rowView_'+one_order[19]+'">');
 					product_html.push('<td data-th="SL">'+j+'</td>');
 					product_html.push('<td data-th="Product Name">'+one_order[20]+'</td>');
@@ -389,7 +390,7 @@ function addSaleOrderQuick()
 					}
 				}
 				
-				$("#totalOrderAmount").text(total_order_amount);
+				$("#totalOrderAmount").text(total_order_amount.toFixed(2));
 				$("#distributorName").html(or_det[i].billing_name);
 				$("#orderDate").html(or_det[i].order_date);
 				if(product_html.length>0){
