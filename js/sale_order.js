@@ -1,5 +1,5 @@
-var site_url = "http://www.arishbionaturals.com/sales/";
-//var site_url = "http://localhost/sales/";
+//var site_url = "http://www.arishbionaturals.com/sales/";
+var site_url = "http://localhost/sales/";
 var addInStock = true;
 var order_no = parseInt(localStorage.getItem("order_no")) + 1;
 var order_count = 0;
@@ -92,7 +92,7 @@ function addInList(){
 	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
 	var distributor_price = $("#distributor_price").val();
 	
-	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count];
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count, proName[0]];
 	
 	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
@@ -182,6 +182,7 @@ function addInList(){
 	order_count++;
 	
 	$("#distributor_name").val(distributor_name);
+	$("#distributor_name").attr("readonly", true);
 	$("#credit_note").val(cred_amnt);
 	$("#email").val(email);
 	$("#contact_no").val(contact_no);
@@ -219,6 +220,133 @@ function removeProduct(order_no1, order_count){
 	}
 }
 
+function removeProductQty(order_count){
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+	var ordet = localStorage.getItem("order_details");
+	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		alert("Error Occured!");
+	}else{
+		var or_det = JSON.parse(ordet);
+		for(var i = 0; i<or_det.length; i++)
+		{
+			if(or_det[i].order_no===order_no){
+				var prev_order_details = or_det[i].details;
+				for(var j=0; j<prev_order_details.length; j++)
+				{
+					var prev_one_order = prev_order_details[j];
+					if(prev_one_order[19]===order_count){
+						prev_order_details.splice(j, 1);
+					}
+				}
+				
+				or_det[i].details = prev_order_details;
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				$("#rowView_"+order_count).remove();
+				addSaleOrderQuick();
+				alert("Product Removed Successfully!");
+			}
+		}
+	}
+}
+
+function changeProductQty(dis, order_count, oldQty){
+	var changeQty = $(dis).val();
+	var r=confirm("Do you want to change the Product Qty '"+changeQty+"' ?");
+	if(r==true)
+	{
+		var regex=/^[0-9]+$/;
+		if(changeQty=='')
+		{
+			alert("Enter Oty!");
+			return false;
+		}
+		else if(!changeQty.match(regex))
+		{
+			alert("Must input numbers");
+			return false;
+		}
+		document.getElementById("wrappers").className = "";
+		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+		var ordet = localStorage.getItem("order_details");
+		if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+			alert("Error Occured!");
+		}else{
+			var or_det = JSON.parse(ordet);
+			for(var i = 0; i<or_det.length; i++)
+			{
+				if(or_det[i].order_no===order_no){
+					var prev_order_details = or_det[i].details;
+					for(var j=0; j<prev_order_details.length; j++)
+					{
+						var prev_one_order = prev_order_details[j];
+						if(prev_one_order[19]===order_count){
+							prev_one_order[3] = changeQty;
+							prev_order_details[j] = prev_one_order;
+						}
+					}
+					
+					or_det[i].details = prev_order_details;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+					addSaleOrderQuick();
+				}
+			}
+		}
+	}else{
+		$(dis).val(oldQty);
+	}
+}
+
+function changeProductFreeQty(dis, order_count, oldQty){
+	var changeQty = $(dis).val();
+	var r=confirm("Do you want to change the Free Qty '"+changeQty+"' ?");
+	if(r==true)
+	{
+		var regex=/^[0-9]+$/;
+		if(changeQty=='')
+		{
+			alert("Enter Oty!");
+			return false;
+		}
+		else if(!changeQty.match(regex))
+		{
+			alert("Must input numbers");
+			return false;
+		}
+		document.getElementById("wrappers").className = "";
+		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+		var ordet = localStorage.getItem("order_details");
+		if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+			alert("Error Occured!");
+		}else{
+			var or_det = JSON.parse(ordet);
+			for(var i = 0; i<or_det.length; i++)
+			{
+				if(or_det[i].order_no===order_no){
+					var prev_order_details = or_det[i].details;
+					for(var j=0; j<prev_order_details.length; j++)
+					{
+						var prev_one_order = prev_order_details[j];
+						if(prev_one_order[19]===order_count){
+							prev_one_order[4] = changeQty;
+							prev_order_details[j] = prev_one_order;
+						}
+					}
+					
+					or_det[i].details = prev_order_details;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+					addSaleOrderQuick();
+				}
+			}
+		}
+	}else{
+		$(dis).val(oldQty);
+	}
+}
+
 function addSaleOrderQuick()
 {
 	document.getElementById("wrappers").className = "";
@@ -231,14 +359,57 @@ function addSaleOrderQuick()
 		for(var i = 0; i<or_det.length; i++)
 		{
 			if(or_det[i].order_no===order_no){
+				
+				//////view order html structure
+				var total_order_amount = 0;
+				var order_details = or_det[i].details;
+				var product_html = [];
+				var free_html = [];
+				for(var j=0; j<order_details.length; j++)
+				{
+					var one_order = order_details[j];
+					var one_total = parseFloat(one_order[17])*parseInt(one_order[3]);
+					total_order_amount += one_total;
+					product_html.push('<tr id="rowView_'+one_order[19]+'">');
+					product_html.push('<td data-th="SL">'+j+'</td>');
+					product_html.push('<td data-th="Product Name">'+one_order[20]+'</td>');
+					product_html.push('<td data-th="SKU">'+one_order[18]+'</td>');
+					product_html.push('<td data-th="Distributor Price">'+one_order[17]+'</td>');
+					product_html.push('<td data-th="Oty Ordered" align="center"><input type="text" type="text" style="width:50px; text-align:center;" value="'+one_order[3]+'" onchange="changeProductQty(this,'+one_order[19]+','+one_order[3]+')"></td>');
+					product_html.push('<td data-th="Total Price">'+one_total+'</td>');
+					product_html.push('<td data-th="Remove" align="center"><a onclick="removeProductQty('+one_order[19]+')" href="javascript: void(0)">Remove</a></td>');
+					product_html.push('</tr>');
+					
+					if(parseInt(one_order[4])>0){
+						free_html.push('<tr>');
+						free_html.push('<td data-th="SL">'+j+'</td>');
+						free_html.push('<td data-th="Product Name">'+one_order[20]+'</td>');
+						free_html.push('<td data-th="Free Oty Ordered" align="center"><input type="text" type="text" style="width:50px; text-align:center;" value="'+one_order[4]+'" onchange="changeProductFreeQty(this,'+one_order[19]+','+one_order[4]+')"></td>');
+						product_html.push('</tr>');
+					}
+				}
+				
+				$("#totalOrderAmount").text(total_order_amount);
+				$("#distributorName").html(or_det[i].billing_name);
+				$("#orderDate").html(or_det[i].order_date);
+				if(product_html.length>0){
+					$("#orderViewPanelProduct").find("tbody").html(product_html.join(""));
+				}
+				if(free_html.length>0){
+					$("#orderViewPanelProductFree").find("tbody").html(free_html.join(""));
+					$("#freeTableZone").show();
+				}
+				
+				
 				or_det[i].order_placed = "Y";
 				or_det_string = JSON.stringify(or_det);
 				localStorage.setItem("order_details", or_det_string);
-				alert("Order Placed Successfully!");
 			}
 		}
 	}
-	window.location.href = "sale_order_ar.html";
+	$("#order_place_panel").hide();	
+	$("#order_view_panel").show();
+	//window.location.href = "sale_order_ar.html";
 }
 
 function addSaleOrder()
@@ -262,6 +433,8 @@ function addSaleOrder()
 	var m = d.getMinutes();
 	var s = d.getSeconds();
 	var totime = h+':'+m+':'+s;
+	
+	var proName = $("#prod_id").val().split("#");
 	
 	var distributor_name = $("#distributor_name").val();
 	var cred_amnt = $("#credit_note").val();
@@ -291,7 +464,7 @@ function addSaleOrder()
 	var exise_central_amnt_inp = $("#exise_central_amnt_inp").val();
 	var distributor_price = $("#distributor_price").val();
 	
-	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count];
+	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count, proName[0]];
 	
 	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
