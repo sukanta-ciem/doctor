@@ -540,8 +540,11 @@ function addSaleOrder()
 		}
 	}
 	
-	
-	window.location.href = "sale_order_ar.html";
+	addSaleOrderQuick();
+}
+
+function searchOrder(){
+	$("#orderStatus").text("No order found!");
 }
 
 function changeDistributorName()
