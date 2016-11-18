@@ -13,7 +13,7 @@ function sync(){
 	document.getElementById("wrappers").className = "";
 	var order_details = localStorage.getItem("order_details");
 	var order = JSON.parse(order_details);
-	if(order_details === null || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
+	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		alert("There is no data to Sync!");
 		window.location.href = "sale_order_ar.html";
 	}
@@ -94,7 +94,7 @@ function addInList(){
 	
 	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count, proName[0]];
 	
-	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
 		var product_qty = $("#product_qty").val();
 		if(product_qty === "" || product_qty === 0){
@@ -194,7 +194,7 @@ function removeProduct(order_no1, order_count){
 	document.getElementById("wrappers").className = "";
 	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
-	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		alert("Error Occured!");
 	}else{
 		var or_det = JSON.parse(ordet);
@@ -224,7 +224,7 @@ function removeProductQty(order_count){
 	document.getElementById("wrappers").className = "";
 	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
-	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		alert("Error Occured!");
 	}else{
 		var or_det = JSON.parse(ordet);
@@ -270,7 +270,7 @@ function changeProductQty(dis, order_count, oldQty){
 		document.getElementById("wrappers").className = "";
 		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 		var ordet = localStorage.getItem("order_details");
-		if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 			alert("Error Occured!");
 		}else{
 			var or_det = JSON.parse(ordet);
@@ -318,7 +318,7 @@ function changeProductFreeQty(dis, order_count, oldQty){
 		document.getElementById("wrappers").className = "";
 		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 		var ordet = localStorage.getItem("order_details");
-		if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 			alert("Error Occured!");
 		}else{
 			var or_det = JSON.parse(ordet);
@@ -352,7 +352,7 @@ function addSaleOrderQuick()
 	document.getElementById("wrappers").className = "";
 	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
 	var ordet = localStorage.getItem("order_details");
-	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		alert("Error Occured!");
 	}else{
 		var or_det = JSON.parse(ordet);
@@ -467,7 +467,7 @@ function addSaleOrder()
 	
 	var one_order_det = [product_id, product_mf_id, size_id, qty, free_qty, ean_no, mrp, base_purchase_price, distributor_unit_price, vat_percentage_inp, vat_amnt_inp, cst_percentage_inp, cst_amnt_inp, exise_state_percentage_inp, exise_state_amnt_inp, exise_central_percentage_inp, exise_central_amnt_inp, distributor_price, sku, order_count, proName[0]];
 	
-	if(ordet === null || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
 		var proName = $("#prod_id").val();
 		var product_qty = $("#product_qty").val();
