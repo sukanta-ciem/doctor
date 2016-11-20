@@ -7,15 +7,22 @@ var order_count = 0;
 $(document).ready(function(){
 	$("#order_no").val(order_no);
 	$("#order_no_invalid_process").val(order_no);
+	sync();
 });
 
 function sync(){
-	document.getElementById("wrappers").className = "";
+	$("#order_place_panel").hide();	
+	$("#order_view_panel").hide();
+	$("#syncPanel").css("height", $(window).height());
+	$("#syncPanel").show();
 	var order_details = localStorage.getItem("order_details");
 	var order = JSON.parse(order_details);
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		alert("There is no data to Sync!");
-		window.location.href = "sale_order_ar.html";
+		$("#order_place_panel").show();
+		$("#syncPanel").hide();
+		return false;
+		//window.location.href = "sale_order_ar.html";
 	}
 	$.ajax({
 		type: 'post',
@@ -28,15 +35,21 @@ function sync(){
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
 				alert("Synced Successfully");
-				window.location.href = "sale_order_ar.html";								
+				$("#order_place_panel").show();
+				$("#syncPanel").hide();
+				return false;								
 			}else{
 				alert("Error Occurred!");
-				window.location.href = "sale_order_ar.html";
+				$("#order_place_panel").show();
+				$("#syncPanel").hide();
+				return false;
 			}
 		},
 	    error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('No Active network Connection is present!');
-			window.location.href = "sale_order_ar.html";
+			$("#order_place_panel").show();
+			$("#syncPanel").hide();
+			return false;
 	    }
 	});
 }
@@ -541,10 +554,6 @@ function addSaleOrder()
 	}
 	
 	addSaleOrderQuick();
-}
-
-function searchOrder(){
-	$("#orderStatus").text("No order found!");
 }
 
 function changeDistributorName()
