@@ -18,7 +18,7 @@ function sync(){
 	var order_details = localStorage.getItem("order_details");
 	var order = JSON.parse(order_details);
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
-		alert("There is no data to Sync!");
+		alert("No pending Orders to upload!");
 		$("#order_place_panel").show();
 		$("#syncPanel").hide();
 		return false;
@@ -34,7 +34,7 @@ function sync(){
 			if(data.status === "success"){
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
-				alert("Synced Successfully");
+				alert("Order uploaded successfully!");
 				$("#order_place_panel").show();
 				$("#syncPanel").hide();
 				return false;								
@@ -398,6 +398,7 @@ function addSaleOrderQuick()
 						free_html.push('<tr>');
 						free_html.push('<td data-th="SL">'+j+'</td>');
 						free_html.push('<td data-th="Product Name">'+one_order[20]+'</td>');
+						free_html.push('<td data-th="SKU">'+one_order[18]+'</td>');
 						free_html.push('<td data-th="Free Oty Ordered" align="center"><input type="text" type="text" style="width:50px; text-align:center;" value="'+one_order[4]+'" onchange="changeProductFreeQty(this,'+one_order[19]+','+one_order[4]+')"></td>');
 						product_html.push('</tr>');
 					}
