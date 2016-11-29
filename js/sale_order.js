@@ -44,7 +44,7 @@ function sync(){
 			}else{
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
-				alert("Error Occurred! \n Error is "+error.join("\n"));
+				alert("Error Occurred! \n Error is "+order_details);
 				$("#order_place_panel").show();
 				$("#syncPanel").hide();
 				return false;
