@@ -27,7 +27,7 @@ function sync(){
 	$.ajax({
 		type: 'post',
 		url: site_url+'api/order_api.php',
-		data: "order="+order_details,
+		data: "order="+encodeURIComponent(order_details),
 		success: function(msg){
 			console.log(msg);
 			var data = JSON.parse(msg);
