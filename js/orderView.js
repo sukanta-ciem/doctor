@@ -3,6 +3,54 @@ var site_url = "http://www.arishbionaturals.com/sales/";
 
 var order_details_server;
 
+function sync(){
+	$("#order_place_panel").hide();	
+	$("#order_view_panel").hide();
+	$("#syncPanel").css("height", $(window).height());
+	$("#syncPanel").show();
+	var order_details = localStorage.getItem("order_details");
+	var order = JSON.parse(order_details);
+	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
+		alert("No pending Orders to upload!");
+		$("#order_place_panel").show();
+		$("#syncPanel").hide();
+		return false;
+		//window.location.href = "sale_order_ar.html";
+	}
+	$.ajax({
+		type: 'post',
+		url: site_url+'api/order_api.php',
+		data: "order="+encodeURIComponent(order_details),
+		success: function(msg){
+			var data = JSON.parse(msg);
+			var placed_order = data.placed_order;
+			var error = data.error;
+
+			if(data.status === "success" && placed_order.length>0){
+				var order_details = JSON.stringify(data.order_details);
+				localStorage.setItem("order_details", order_details);
+				alert("Order uploaded successfully! Placed order no is "+placed_order.join(","));
+				$("#order_place_panel").show();
+				$("#syncPanel").hide();
+				return false;								
+			}else{
+				var order_details = JSON.stringify(data.order_details);
+				localStorage.setItem("order_details", order_details);
+				alert("Error Occurred! \n Error is "+order_details);
+				$("#order_place_panel").show();
+				$("#syncPanel").hide();
+				return false;
+			}
+		},
+	    error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert('No Active network Connection is present!');
+			$("#order_place_panel").show();
+			$("#syncPanel").hide();
+			return false;
+	    }
+	});
+}
+
 function searchOrder(){
 	document.getElementById("wrappers").className = "";
 	var d1 = $("#datepicker1").val();

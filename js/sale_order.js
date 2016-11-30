@@ -29,13 +29,10 @@ function sync(){
 		url: site_url+'api/order_api.php',
 		data: "order="+encodeURIComponent(order_details),
 		success: function(msg){
-			console.log(msg);
 			var data = JSON.parse(msg);
-			console.log(data); 
 			var placed_order = data.placed_order;
 			var error = data.error;
-			var sentOrder = JSON.stringify(data.sent_order);
-			alert("Sent Order "+sentOrder);
+
 			if(data.status === "success" && placed_order.length>0){
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
