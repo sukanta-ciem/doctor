@@ -176,7 +176,7 @@ padding:5px;
 </style>
 
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="js/orderView.js"></script>
+<script type="text/javascript" src="js/orderViewO.js"></script>
 <!-- Add fancyBox main JS and CSS files -->
 <script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
@@ -287,36 +287,38 @@ padding:5px;
 <div class="others_content_frame" style="height:auto;">
     <div id="wrapper">
     	<div class="others_content">
-        <h2 class="spl_h2">View Order</h2>
+        <h2 class="spl_h2">Order Status Report (Order wise)</h2>
         <div class="others_content_in" style="height:auto;">
         	<form action="" method="post" enctype="multipart/form-data" onsubmit="javascript: void(0);">
             <table class="distributor_from ord_view_all" align="center" cellpadding="0" cellspacing="6">
                 <tr>
-                    <td>Distributor-Name:&nbsp;<input type="text" pleceholder="Distributor Name" name="distributor_name" id="distributor_name" value="" /></td>
+                    <td>Distributor-Name:&nbsp;<input type="text" pleceholder="Distributor Name" name="distributor_name" id="distributor_id" value="" /></td>
+					<td>Order-No:&nbsp;<input type="text" pleceholder="Distributor Name" name="order_no" id="order_no" value="" /></td>
                     <td>From-Date:&nbsp;<input pleceholder="From date:" type="text" name="from_date" id="datepicker1" value="" readonly="readonly" /></td>
                     <td>To-Date:&nbsp;<input pleceholder="To date:" type="text" name="to_date" id="datepicker2" value="" readonly="readonly" /></td>
-                    <td>&nbsp;<input class="distributor_from_btn" type="button" id="search" value="Search" name="search" onclick="searchOrder();" /></td>
+                    <td>&nbsp;<input class="distributor_from_btn" type="button" value="Search" name="search" onclick="searchOrderO();" /></td>
                 </tr>
             </table>
             </form>
             <form action="" method="post" enctype="multipart/form-data">
             <div class="clear"></div>
-            <table class="sale_ar_view ord_view_all" width="100%" border="0"  cellspacing="0" cellpadding="0" id="orderViewList">
-				<thead>
-                    <tr>
-                      <td align="center" class="bg05"><strong>Sl No</strong></td>
-                      <td align="center" class="bg05"><strong>Name</strong></td>
-                      <td align="center" class="bg05"><strong>Order No</strong></td>
-                      <td align="center" class="bg05"><strong>Date</strong></td>
-                      <td align="center" class="bg05"><strong>Price</strong></td>
-                      <td align="center" class="bg05"><strong>View</strong></td>
-                    </tr>
-				</thead>
-				<tbody>
-                    <tr id="summeryRow">
-                        <td colspan="15" align="center" id="orderStatus" class="bg06" valign="middle" style="border:none;"></td>
-                    </tr>
-				</tbody>
+            <table class="sale_ar_view ord_view_all resp_table" width="100%" border="0"  cellspacing="0" cellpadding="0" id="orderViewList">
+                    <thead>
+						<tr>
+						  <th align="center" class="bg05"><strong>Sl No</strong></th>
+						  <th align="center" class="bg05"><strong>Orders<br />Received</strong></th>
+						  <th align="center" class="bg05"><strong>Order<br />Amt</strong></th>
+						  <th align="center" class="bg05"><strong>Payment<br />Amt</strong></th>
+						  <th align="center" class="bg05"><strong>Order<br />Date</strong></th>
+						  <th align="center" class="bg05"><strong>Despatche<br />Status<br />(Complete / Partial / No)</strong></th>
+						  <th align="center" class="bg05"><strong>View<br />Details</strong></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="summeryRow">
+							<td colspan="15" align="center" id="orderStatus" class="bg06" valign="middle" style="border:none;"></td>
+						</tr>
+					</tbody>
         	</table>
             </form>
             <div class="clear"></div>
@@ -366,8 +368,10 @@ padding:5px;
                 <th>SKU</th>
                 <th>Distributor Price</th>
                 <th>Oty Ordered</th>
+				<th>Oty Delivered</th>
+				<th>Oty Remains</th>
+				<th>Cancelled Qty</th>
                 <th>Total Price</th>
-                <th align="center">Remove</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -395,6 +399,9 @@ padding:5px;
 				<th>Product Name</th>
                 <th>SKU</th>
                 <th>Free Oty Ordered</th>
+				<th>Free Oty Delivered</th>
+				<th>Free Oty Remains</th>
+				<th>Cancelled Free Qty</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -416,9 +423,14 @@ padding:5px;
 <script type="text/javascript">
 	var old_jQuery = jQuery.noConflict(true);
 	var distributor_array = JSON.parse(localStorage.getItem("distributor_details"));
+	var order_array = JSON.parse(localStorage.getItem("order_no_details"));
 	old_jQuery(document).ready(function(){
-		old_jQuery("#distributor_name").autocomplete({
+		old_jQuery("#distributor_id").autocomplete({
 			source: distributor_array,
+			minLength:1
+		});
+		old_jQuery("#order_no").autocomplete({
+			source: order_array,
 			minLength:1
 		});
 	});

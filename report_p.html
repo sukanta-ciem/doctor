@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Arish Bio Naturals</title>
@@ -176,7 +176,7 @@ padding:5px;
 </style>
 
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="js/orderView.js"></script>
+<script type="text/javascript" src="js/orderViewP.js"></script>
 <!-- Add fancyBox main JS and CSS files -->
 <script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
@@ -287,15 +287,16 @@ padding:5px;
 <div class="others_content_frame" style="height:auto;">
     <div id="wrapper">
     	<div class="others_content">
-        <h2 class="spl_h2">View Order</h2>
+        <h2 class="spl_h2">Order Status Report (Product wise)</h2>
         <div class="others_content_in" style="height:auto;">
         	<form action="" method="post" enctype="multipart/form-data" onsubmit="javascript: void(0);">
             <table class="distributor_from ord_view_all" align="center" cellpadding="0" cellspacing="6">
                 <tr>
                     <td>Distributor-Name:&nbsp;<input type="text" pleceholder="Distributor Name" name="distributor_name" id="distributor_name" value="" /></td>
+					<td>Order-No:&nbsp;<input type="text" pleceholder="Distributor Name" name="order_no" id="order_no" value="" /></td>
                     <td>From-Date:&nbsp;<input pleceholder="From date:" type="text" name="from_date" id="datepicker1" value="" readonly="readonly" /></td>
                     <td>To-Date:&nbsp;<input pleceholder="To date:" type="text" name="to_date" id="datepicker2" value="" readonly="readonly" /></td>
-                    <td>&nbsp;<input class="distributor_from_btn" type="button" id="search" value="Search" name="search" onclick="searchOrder();" /></td>
+                    <td>&nbsp;<input class="distributor_from_btn" type="button" id="search" value="Search" name="search" onclick="searchOrderP();" /></td>
                 </tr>
             </table>
             </form>
@@ -304,12 +305,13 @@ padding:5px;
             <table class="sale_ar_view ord_view_all" width="100%" border="0"  cellspacing="0" cellpadding="0" id="orderViewList">
 				<thead>
                     <tr>
-                      <td align="center" class="bg05"><strong>Sl No</strong></td>
-                      <td align="center" class="bg05"><strong>Name</strong></td>
-                      <td align="center" class="bg05"><strong>Order No</strong></td>
-                      <td align="center" class="bg05"><strong>Date</strong></td>
-                      <td align="center" class="bg05"><strong>Price</strong></td>
-                      <td align="center" class="bg05"><strong>View</strong></td>
+                      <th align="center" class="bg05"><strong>Sl No</strong></th>
+                      <th align="center" class="bg05"><strong>Product<br />Name</strong></th>
+                      <th align="center" class="bg05"><strong>Weight</strong></th>
+                      <th align="center" class="bg05"><strong>Order<br />Received<br />Qty</strong></th>
+					  <th align="center" class="bg05"><strong>Despatched<br />Qty</strong></th>
+                      <th align="center" class="bg05"><strong>Remaining<br />Qty</strong></th>
+					  <th align="center" class="bg05"><strong>Cancelled<br />Qty</strong></th>
                     </tr>
 				</thead>
 				<tbody>
@@ -326,87 +328,6 @@ padding:5px;
 </div>
 <div class="clear"></div>
 </div>
-<div class="ifreme_frame" id="viewOrder" style="display:none">
-<div class="gree_bar">Order Details<a class="back_btn" href="javascript:_xyz.fancybox.close();">Back</a></div>
-<form action="" method="post" enctype="multipart/form-data" onsubmit="javascript: return false;" >
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-  	<td align="left" valign="top">
-    <div class="payment_left">
-    Total Order Amount: <span id="totalOrderAmount"></span>
-    </div>
-    </td>
-    <td align="right" valign="top">
-    
-    </td>
-  </tr>
-</table>
-<br />
-<div class="payment_toptable">
-<table class="resp_frame_table" width="100%" border="1" cellspacing="0" cellpadding="0">
-  <tr class="ext_padding_tr">
-    <td width="50%">Order No</td>
-    <td width="50%" id="orderNo">NA</td>
-  </tr>
-  <tr class="ext_padding_tr">
-    <td width="50%">Distributor Name</td>
-    <td width="50%" id="distributorName"></td>
-  </tr>
-  <tr class="ext_padding_tr">
-    <td>Date:</td>
-    <td id="orderDate"></td>
-  </tr>
-  <tr class="ext_padding_tr2">
-  	<td colspan="2">
-		<table class="resp_table" width="100%" border="1" cellspacing="0" cellpadding="0" id="orderViewPanelProduct">
-			<thead>
-			<tr>
-				<th>Sl</th>
-				<th>Product Name</th>
-                <th>SKU</th>
-                <th>Distributor Price</th>
-                <th>Oty Ordered</th>
-                <th>Total Price</th>
-                <th align="center">Remove</th>
-			</tr>
-			</thead>
-			<tbody>
-			
-			</tbody>
-		</table>
-	</td>
-  </tr>
-</table>
-</div>
-<br />
-<br />
-<div class="payment_toptable" id="freeTableZone" style="display:none">
-<table class="resp_frame_table" width="100%" border="1" cellspacing="0" cellpadding="0">
-  <tr class="ext_padding_tr">
-  	<td colspan="2" align="center">Free Oty</td>
-  </tr>
-  <tr class="ext_padding_tr2">
-  	<td colspan="2">
-		
-		<table class="resp_table" width="100%" border="1" cellspacing="0" cellpadding="0" id="orderViewPanelProductFree">
-			<thead>
-			<tr>
-				<th>Sl</th>
-				<th>Product Name</th>
-                <th>SKU</th>
-                <th>Free Oty Ordered</th>
-			</tr>
-			</thead>
-			<tbody>
-			
-			</tbody>
-		</table>
-	</td>
-  </tr>
-</table>
-</div>
-</form>
-</div>
 </body>
 
 <script type="text/javascript" src="autocomplete/jquery.min.js"></script>
@@ -416,9 +337,14 @@ padding:5px;
 <script type="text/javascript">
 	var old_jQuery = jQuery.noConflict(true);
 	var distributor_array = JSON.parse(localStorage.getItem("distributor_details"));
+	var order_array = JSON.parse(localStorage.getItem("order_no_details"));
 	old_jQuery(document).ready(function(){
 		old_jQuery("#distributor_name").autocomplete({
 			source: distributor_array,
+			minLength:1
+		});
+		old_jQuery("#order_no").autocomplete({
+			source: order_array,
 			minLength:1
 		});
 	});
