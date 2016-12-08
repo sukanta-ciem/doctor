@@ -483,3 +483,10 @@ function updatePrice(order_no1)
 		}
 	}
 }
+
+function loggedOut(){
+	localStorage.setItem("loggedIn", "no");
+	localStorage.setItem("user_id", "");
+	localStorage.setItem("username", "");
+	window.location.href = "index.html";
+}

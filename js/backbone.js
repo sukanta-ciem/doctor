@@ -14,14 +14,29 @@ $(document).ready(function(){
 			type: 'post',
 			url: site_url+'api/distributor_api.php',
 			data: "user="+user,
+			async: false,
 			success: function(msg){
 				var data = JSON.parse(msg);
 				if(data.status === "success"){
 					var distributor_details = JSON.stringify(data.distributor);
-					localStorage.setItem("distributor_details", distributor_details);
-					window.location.href = "sale_order_ar.html";								
+					localStorage.setItem("distributor_details", distributor_details);					
 				}else{
 				/////do nothing
+				}
+			}
+		});
+		$.ajax({
+			type: 'post',
+			url: site_url+'api/orderlist_api.php',
+			data: "user="+user,
+			async: false,
+			success: function(msg){
+				var data = JSON.parse(msg);
+				if(data.status === "success"){
+					var order_no_details = JSON.stringify(data.distributor);
+					localStorage.setItem("order_no_details", order_no_details);						
+				}else{
+					/////do nothing
 				}
 			}
 		});
@@ -29,6 +44,7 @@ $(document).ready(function(){
 		   type: 'post',
 		   url: site_url+'api/product_api.php',
 		   data: "",
+		   async: false,
 		   success: function(msg){
 			  var data = JSON.parse(msg);
 			  if(data.status === "success"){
