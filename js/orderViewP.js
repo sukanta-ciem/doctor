@@ -83,13 +83,13 @@ function searchOrderP(){
 				order_details_server = data.orderDetails;
 				for(var i=0; i<order_details_server.length; i++){
 					view_order_html_server.push('<tr>');
-					view_order_html_server.push('<td align="center" class="bg06">'+cnt+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].product_name+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].sku+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].total_p+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].total_d+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].total_r+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].total_c+'</td>');
+					view_order_html_server.push('<td data-th="Sl No" align="center" class="bg06">'+cnt+'</td>');
+					view_order_html_server.push('<td data-th="Product Name" align="center" class="bg06">'+order_details_server[i].product_name+'</td>');
+					view_order_html_server.push('<td data-th="Weight" align="center" class="bg06">'+order_details_server[i].sku+'</td>');
+					view_order_html_server.push('<td data-th="Order Received Qty" align="center" class="bg06">'+order_details_server[i].total_p+'</td>');
+					view_order_html_server.push('<td data-th="Despatched Qty" align="center" class="bg06">'+order_details_server[i].total_d+'</td>');
+					view_order_html_server.push('<td data-th="Remaining Qty" align="center" class="bg06">'+order_details_server[i].total_r+'</td>');
+					view_order_html_server.push('<td data-th="Cancelled Qty" align="center" class="bg06">'+order_details_server[i].total_c+'</td>');
 					view_order_html_server.push('</tr>');
 					cnt++;
 				}

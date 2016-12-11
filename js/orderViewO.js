@@ -83,13 +83,13 @@ function searchOrderO(){
 				order_details_server = data.orderDetails;
 				for(var i=0; i<order_details_server.length; i++){
 					view_order_html_server.push('<tr>');
-					view_order_html_server.push('<td align="center" class="bg06">'+cnt+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].order_no+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].totAmnt+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].total_payment_received_amount+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].order_date+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06">'+order_details_server[i].delivery_status+'</td>');
-					view_order_html_server.push('<td align="center" class="bg06"><a class="viewClass fancybox" href="#viewOrder" data-orderno="'+order_details_server[i].order_no+'" onclick="openPopUp(this,2,1)">View</a></td>');
+					view_order_html_server.push('<td data-th="Sl No" align="center" class="bg06">'+cnt+'</td>');
+					view_order_html_server.push('<td data-th="Orders Received" align="center" class="bg06">'+order_details_server[i].order_no+'</td>');
+					view_order_html_server.push('<td data-th="Order Amt" align="center" class="bg06">'+order_details_server[i].totAmnt+'</td>');
+					view_order_html_server.push('<td data-th="Payment Amt" align="center" class="bg06">'+order_details_server[i].total_payment_received_amount+'</td>');
+					view_order_html_server.push('<td data-th="Order Date" align="center" class="bg06">'+order_details_server[i].order_date+'</td>');
+					view_order_html_server.push('<td data-th="Despatche Status (Complete/Partial/No)" align="center" class="bg06">'+order_details_server[i].delivery_status+'</td>');
+					view_order_html_server.push('<td data-th="View Details" align="center" class="bg06"><a class="viewClass fancybox" href="#viewOrder" data-orderno="'+order_details_server[i].order_no+'" onclick="openPopUp(this,2,1)">View</a></td>');
 					view_order_html_server.push('</tr>');
 					cnt++;
 				}
@@ -178,9 +178,9 @@ function openPopUp(elm, type, flag){
 						product_html.push('<td data-th="SKU">'+one_order[18]+'</td>');
 						product_html.push('<td data-th="Distributor Price">'+one_order[17]+'</td>');
 						product_html.push('<td data-th="Oty Ordered" align="center">'+one_order[3]+'</td>');
-						product_html.push('<td data-th="Oty Ordered" align="center">'+one_order[21]+'</td>');
-						product_html.push('<td data-th="Oty Ordered" align="center">'+one_order[22]+'</td>');
-						product_html.push('<td data-th="Oty Ordered" align="center">'+one_order[23]+'</td>');
+						product_html.push('<td data-th="Oty Delivered" align="center">'+one_order[21]+'</td>');
+						product_html.push('<td data-th="Oty Remains" align="center">'+one_order[22]+'</td>');
+						product_html.push('<td data-th="Cancelled Qty" align="center">'+one_order[23]+'</td>');
 						product_html.push('<td data-th="Total Price">'+one_total+'</td>');
 						product_html.push('</tr>');
 						
@@ -190,9 +190,9 @@ function openPopUp(elm, type, flag){
 							free_html.push('<td data-th="Product Name">'+one_order[20]+'</td>');
 							free_html.push('<td data-th="SKU">'+one_order[18]+'</td>');
 							free_html.push('<td data-th="Free Oty Ordered" align="center">'+one_order[4]+'</td>');
-							free_html.push('<td data-th="Free Oty Ordered" align="center">'+one_order[24]+'</td>');
-							free_html.push('<td data-th="Free Oty Ordered" align="center">'+one_order[25]+'</td>');
-							free_html.push('<td data-th="Free Oty Ordered" align="center">'+one_order[26]+'</td>');
+							free_html.push('<td data-th="Free Oty Delivered" align="center">'+one_order[24]+'</td>');
+							free_html.push('<td data-th="Free Oty Remains" align="center">'+one_order[25]+'</td>');
+							free_html.push('<td data-th="Free Cancelled Qty" align="center">'+one_order[26]+'</td>');
 							product_html.push('</tr>');
 						}
 					}
