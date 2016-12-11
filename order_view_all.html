@@ -180,6 +180,13 @@ padding:5px;
 <!-- Add fancyBox main JS and CSS files -->
 <script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".header_btn").click(function(){
+        $(".header_btn_area").toggleClass("header_btn_area_add");
+    });
+});
+</script>
 </head>
 <body class="index_body_bg">
 <div id="wrappers"><div id="loader-cont"><img src="images/ajax-loader.gif" /></div></div>
@@ -188,22 +195,22 @@ padding:5px;
 	<div class="menu-inner">
         <div id="wrapper">
         	<div class="header_btn_frame">
-
-                    <div class="header_btn_area">
-                        <a href="javascript: void(0);" onclick="loggedOut();"><span>Log Out</span></a>
-                        <div class="clear"></div>
-                        <span></span>
-                        <div class="clear"></div>                        
-                        <a href="sale_order_ar.html"><span >Home</span></a>
-                        <div class="clear"></div>                        
-                        <a href="javascript: void(0);" onclick="sync();"><span >Sync Data</span></a>
-						<div class="clear"></div>                        
-                        <a href="order_view_all.html"><span >View Order</span></a>
-						<div class="clear"></div>                        
-                        <a href="report_o.html"><span >Report(O)</span></a>
-						<div class="clear"></div>                        
-                        <a href="report_p.html"><span >Report(P)</span></a>
-                    </div>
+				<div class="header_btn"></div>
+				<div class="header_btn_area">
+					<a href="javascript: void(0);" onclick="loggedOut();"><span>Log Out</span></a>
+					<div class="clear"></div>
+					<span></span>
+					<div class="clear"></div>                        
+					<a href="sale_order_ar.html"><span >Home</span></a>
+					<div class="clear"></div>                        
+					<a href="javascript: void(0);" onclick="sync();"><span >Sync Data</span></a>
+					<div class="clear"></div>                        
+					<a href="order_view_all.html"><span >View Order</span></a>
+					<div class="clear"></div>                        
+					<a href="report_o.html"><span >Report(O)</span></a>
+					<div class="clear"></div>                        
+					<a href="report_p.html"><span >Report(P)</span></a>
+				</div>
             </div>
             <div class="brand">
                 <a class="nav-link" href="sale_order_ar.html">
