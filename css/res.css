@@ -234,7 +234,8 @@
 		max-width: 70px;
 	}
 	.menu-inner .brand a img {
-		margin: 20px 0;
+		/*margin: 20px 0;*/
+		margin: 35px 0 0;
 	}
 	.product_area .product_box {
 		margin: 0 2% 30px;
@@ -258,7 +259,8 @@
 		width: 600px;
 	}
 	.menu-inner .brand a img {
-		margin: 20px 0 ;
+		/*margin: 20px 0;*/
+		margin: 35px 0 0;
 	}
 	.menu-inner .brand {
 		width: 120px;
@@ -406,7 +408,8 @@
 		width: 440px;
 	}
 	.menu-inner .brand a img {
-		margin: 20px 0;
+		/*margin: 20px 0;*/
+		margin: 35px 0 0;
 	}
 	.menu-inner .brand {
 		width: 120px;
@@ -865,7 +868,8 @@
 		width: 100%;
 	}
 	.menu-inner .brand a img {
-		margin: 20px 0;
+		/*margin: 20px 0;*/
+		margin: 35px 0 0;
 	}
 	.product_area .product_box {
 		margin: 0 10px 40px;

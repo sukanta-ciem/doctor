@@ -122,7 +122,8 @@ img {
 	max-height: 100%;
 	max-width: 100%;
 	float:left;
-	margin: 10px 0;
+	/*margin: 10px 0;*/
+	margin: 25px 0 0;
 }
 .menu-inner .brand img.mam {
 	max-height: 100%;
@@ -156,7 +157,73 @@ img {
 .menu-inner .brand.brand_ext .sp_marquee h3 {
 	top: 20px;
 }
+
+.header_btn {
+    color: #354a9f;
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+	cursor: pointer;
+	right: 0;
+    top: 40px;
+}
+.header_id_text {
+    color: #724700;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 28px;
+    margin: 0;
+    padding: 0;
+	text-align:center;
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+}
+
+
 .header_btn_area {
+	display:none;
+}
+.header_btn_area.header_btn_area_add {
+	display:block;
+}
+.header_btn:after {
+	display: block;
+	content: '';
+	position: absolute;
+	height: 3px;
+	width: 22px;
+	border-top: 4px solid #9b7022;
+	border-bottom: 4px solid #9b7022;
+	right: 10px;
+	top: 6px;
+	box-sizing:content-box;
+}
+.header_btn:before {
+	display: block;
+	content: '';
+	position: absolute;
+	height: 3px;
+	width: 22px;
+	border-top: 4px solid #9b7022;
+	right: 10px;
+	top: 20px;
+	box-sizing:content-box;
+}
+.header_btn:hover:after,  .header_btn:hover:before {
+	border-color: #724700;
+}
+.header_btn.open:after,  .header_btn.open:before {
+	border-color: #724700;
+}
+
+
+.header_btn_area_old {
 	clear: right;
     float: right;
     margin: 8px 0 5px;
@@ -164,15 +231,30 @@ img {
     right: 0;
     width: 90px;
 }
+.header_btn_area {
+    background: #FFFCB8;
+    border: 1px solid #906f34;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #8e712d;
+    clear: right;
+    float: right;
+    margin: 8px 0 5px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 65px;
+    width: 200px;
+}
+
 .header_btn_area span {
     color: #896011;
     float: right;
-    font-size: 11px;
     font-weight: bold;
-    line-height: 16px;
+	font-size: 24px;
+    line-height: 34px;
 }
 .header_btn_area a:hover span {
-	color:#F0DA91;
+	color:#6c4300;
 }
 /*===================================================  header end ================================================================*/
 /*===================================================  banner start ================================================================*/			
