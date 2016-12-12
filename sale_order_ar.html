@@ -198,6 +198,7 @@ $(document).ready(function(){
                 <a class="nav-link" href="sale_order_ar.php">
                     <img title="logo" alt="logo" src="images/logo_n.png">
                 </a>
+				<div class="header_id_text"></div>
             </div>
         </div>
     </div>
@@ -575,6 +576,7 @@ function setDistributor()
 	var user = localStorage.getItem("username");
 	if(loggedIn === "ok"){
 		document.getElementById("wrappers").className = "hidden";
+		$(".header_id_text").text(user);
 	}else{
 		alert("Please Log In!");
 		window.location.href = "index.html";

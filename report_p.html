@@ -211,6 +211,7 @@ $(document).ready(function(){
                 <a class="nav-link" href="sale_order_ar.html">
                     <img title="logo" alt="logo" src="images/logo_n.png">
                 </a>
+				<div class="header_id_text"></div>
             </div>
         </div>
     </div>
@@ -304,7 +305,7 @@ $(document).ready(function(){
             </form>
             <form action="" method="post" enctype="multipart/form-data">
             <div class="clear"></div>
-            <table class="sale_ar_view ord_view_all" width="100%" border="0"  cellspacing="0" cellpadding="0" id="orderViewList">
+            <table class="sale_ar_view ord_view_all resp_table" width="100%" border="0"  cellspacing="0" cellpadding="0" id="orderViewList">
 				<thead>
                     <tr>
                       <th align="center" class="bg05"><strong>Sl No</strong></th>
@@ -374,6 +375,7 @@ jQuery( document ).ready(function( $ ) {
 	var user = localStorage.getItem("username");
 	if(loggedIn === "ok"){
 		document.getElementById("wrappers").className = "hidden";
+		$(".header_id_text").text(user);
 	}else{
 		alert("Please Log In!");
 		window.location.href = "index.html";
