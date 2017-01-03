@@ -588,7 +588,7 @@ function fetch_disdata(distributor_name)
 				$("#credit_note").val(cred_amnt);
 				$("#email").val(email);
 				$("#contact_no").val(contact_no);
-				$("#special_distributor").val(dist_id);
+				$("#special_distributor").val(special_distributor);
 				$("#distributor_id").val(dist_id);
 			}
 		}
@@ -602,6 +602,7 @@ function fetch_data(prod_name)
 	{
 		var res = prod_name.split("#");
 		var prod_id = res[1];
+		var special_distributor = $("#special_distributor").val();
 		var product_details = JSON.parse(localStorage.product_details);
 		for(var i=0; i<product_details.length; i++){
 			if(product_details[i].other_detail.product_id === prod_id){
@@ -611,16 +612,52 @@ function fetch_data(prod_name)
 				var sku = product_details[i].other_detail.sku;
 				var mrp = product_details[i].other_detail.mrp;
 				var base_purchase_price = product_details[i].other_detail.base_purchase_price;
-				var distributor_unit_price = product_details[i].other_detail.sp_distributor_unit_price;
-				var vat_percentage_inp = product_details[i].other_detail.vat_percentage_inp;
-				var vat_amnt_inp = product_details[i].other_detail.sp_vat_amnt_inp;
-				var cst_percentage_inp = product_details[i].other_detail.cst_percentage_inp;
-				var cst_amnt_inp = product_details[i].other_detail.sp_cst_amnt_inp;
-				var exise_state_percentage_inp = product_details[i].other_detail.exise_state_percentage_inp;
-				var exise_state_amnt_inp = product_details[i].other_detail.sp_exise_state_amnt_inp;
-				var exise_central_percentage_inp = product_details[i].other_detail.exise_central_percentage_inp;
-				var exise_central_amnt_inp = product_details[i].other_detail.sp_exise_central_amnt_inp;
-				var distributor_price = product_details[i].other_detail.sp_distributor_price;
+				if(special_distributor.toLowerCase()==="y"){
+					var distributor_unit_price = product_details[i].other_detail.sp_distributor_unit_price;
+					var vat_percentage_inp = product_details[i].other_detail.vat_percentage_inp;
+					var vat_amnt_inp = product_details[i].other_detail.sp_vat_amnt_inp;
+					var cst_percentage_inp = product_details[i].other_detail.cst_percentage_inp;
+					var cst_amnt_inp = product_details[i].other_detail.sp_cst_amnt_inp;
+					var exise_state_percentage_inp = product_details[i].other_detail.exise_state_percentage_inp;
+					var exise_state_amnt_inp = product_details[i].other_detail.sp_exise_state_amnt_inp;
+					var exise_central_percentage_inp = product_details[i].other_detail.exise_central_percentage_inp;
+					var exise_central_amnt_inp = product_details[i].other_detail.sp_exise_central_amnt_inp;
+					var distributor_price = product_details[i].other_detail.sp_distributor_price;
+				}else if(special_distributor.toLowerCase()==="o"){
+					var distributor_unit_price = product_details[i].other_detail.os_distributor_unit_price;
+					var vat_percentage_inp = product_details[i].other_detail.os_vat_percentage_inp;
+					var vat_amnt_inp = product_details[i].other_detail.os_vat_amnt_inp;
+					var cst_percentage_inp = product_details[i].other_detail.os_cst_percentage_inp;
+					var cst_amnt_inp = product_details[i].other_detail.os_cst_amnt_inp;
+					var exise_state_percentage_inp = product_details[i].other_detail.os_exise_state_percentage_inp;
+					var exise_state_amnt_inp = product_details[i].other_detail.os_exise_state_amnt_inp;
+					var exise_central_percentage_inp = product_details[i].other_detail.os_exise_central_percentage_inp;
+					var exise_central_amnt_inp = product_details[i].other_detail.os_exise_central_amnt_inp;
+					var distributor_price = product_details[i].other_detail.os_distributor_price;
+				}else if(special_distributor.toLowerCase()==="n"){
+					var distributor_unit_price = product_details[i].other_detail.distributor_unit_price;
+					var vat_percentage_inp = product_details[i].other_detail.vat_percentage_inp;
+					var vat_amnt_inp = product_details[i].other_detail.vat_amnt_inp;
+					var cst_percentage_inp = product_details[i].other_detail.cst_percentage_inp;
+					var cst_amnt_inp = product_details[i].other_detail.cst_amnt_inp;
+					var exise_state_percentage_inp = product_details[i].other_detail.exise_state_percentage_inp;
+					var exise_state_amnt_inp = product_details[i].other_detail.exise_state_amnt_inp;
+					var exise_central_percentage_inp = product_details[i].other_detail.exise_central_percentage_inp;
+					var exise_central_amnt_inp = product_details[i].other_detail.exise_central_amnt_inp;
+					var distributor_price = product_details[i].other_detail.distributor_price;
+				}else{
+					var distributor_unit_price = product_details[i].other_detail.distributor_unit_price;
+					var vat_percentage_inp = product_details[i].other_detail.vat_percentage_inp;
+					var vat_amnt_inp = product_details[i].other_detail.vat_amnt_inp;
+					var cst_percentage_inp = product_details[i].other_detail.cst_percentage_inp;
+					var cst_amnt_inp = product_details[i].other_detail.cst_amnt_inp;
+					var exise_state_percentage_inp = product_details[i].other_detail.exise_state_percentage_inp;
+					var exise_state_amnt_inp = product_details[i].other_detail.exise_state_amnt_inp;
+					var exise_central_percentage_inp = product_details[i].other_detail.exise_central_percentage_inp;
+					var exise_central_amnt_inp = product_details[i].other_detail.exise_central_amnt_inp;
+					var distributor_price = product_details[i].other_detail.distributor_price;
+				}
+				
 				var ean_no = product_details[i].other_detail.ean_no;
 				
 				$("#product_mf_id").val(product_mf_id);
@@ -649,6 +686,7 @@ function loggedOut(){
 	localStorage.setItem("loggedIn", "no");
 	localStorage.setItem("user_id", "");
 	localStorage.setItem("username", "");
+	localStorage.setItem("distributor_details", "");
 	window.location.href = "index.html";
 }
 
