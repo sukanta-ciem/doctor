@@ -72,9 +72,7 @@ a {
 	color:#fff;
 	padding:5px 10px;
 }
-td {
-    padding: 0 5px;
-}
+
 .payment_toptable table td {
     padding: 0;
 }
@@ -231,11 +229,11 @@ $(document).ready(function(){
                   <li>
                   <label>Distributor Name </strong><font color="#FF0000">*</font> 
                   
-                  <input type="text" style="background:none; border: none; color: #ccc; font-size: 0; height: 1px; width: 1px;" name="distributor_id" id="distributor_id" readonly value="" />
-                  <input type="text" style="background:none; border: none; color: #ccc; font-size: 0; height: 1px; width: 1px;" name="special_distributor" id="special_distributor" readonly value="" />
+                  <input type="hidden" name="distributor_id" id="distributor_id" readonly value="" />
+                  <input type="hidden" name="special_distributor" id="special_distributor" readonly value="" />
                   
                   </label>
-                  <input type="text" class="drop_down editable_area" name="distributor_name" id="distributor_name" value="" onkeyup="fetch_disdata(this.value);"  onblur="fetch_disdata(this.value);" onchange="changeDistributorName();" required />
+                  <input type="text" class="drop_down editable_area" name="distributor_name" id="distributor_name" value="" onKeyUp="fetch_disdata(this.value);" onblur="fetch_disdata(this.value);" onchange="changeDistributorName();" required />
                   </li>
 				  <li>
                   <label>Credit Note</label>
