@@ -280,71 +280,76 @@ $(document).ready(function(){
                   <label>Contact No <font color="#FF0000">*</font></label>
                   <input type="text" class="" name="contact_no" id="contact_no" readonly value="" />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Order No </label>
-                  <input name="order_no" type="text" class="" id="order_no" value="" readonly />
+                  <input name="order_no" type="hidden" class="" id="order_no" value="" readonly />
                   <input style="display:none;" name="order_no_invalid_process" id="order_no_invalid_process" type="text" value="" required />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Delivery date</label>
-				  <input name="deliveryDate" type="text" class=" editable_area" id="datepicker1" value="" readonly />
+				  <input name="deliveryDate" type="hidden" class=" editable_area" id="datepicker1" value="" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Work Order No</label>
-				  <input name="work_order_no" type="text" class=" editable_area" id="work_order_no" value="" />
+				  <input name="work_order_no" type="hidden" class=" editable_area" id="work_order_no" value="" />
                   </li>
                   <li>
                   <label>MRP</label>
                   <input name="mrp" type="text" class=" wtUpload" id="mrp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Base Purchase Price</label>
-                  <input name="base_purchase_price" type="text" class=" wtUpload" id="base_purchase_price" readonly />
+                  <input name="base_purchase_price" type="hidden" class=" wtUpload" id="base_purchase_price" readonly />
                   </li>
                   <li>
                   <label>Distributor Price without tax</label>
                   <input name="distributor_unit_price" type="text" class="wtUpload total_amount_input total_amount_input2" id="distributor_unit_price" readonly />
                   </li> 
-                  <li>
+                  <li style="display:none;">
                   <label>Vat %</label>
-                  <input name="vat_percentage_inp" type="text" class="" id="vat_percentage_inp" readonly />
+                  <input name="vat_percentage_inp" type="hidden" class="" id="vat_percentage_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Vat Amnount</label>
-                  <input name="vat_amnt_inp" type="text" class="" id="vat_amnt_inp" readonly />
+                  <input name="vat_amnt_inp" type="hidden" class="" id="vat_amnt_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Cst Tax %</label>
-                  <input name="cst_percentage_inp" type="text" class="" id="cst_percentage_inp" readonly />       
-                  </li>
-                  <li>
+                  <input name="cst_percentage_inp" type="hidden" class="" id="cst_percentage_inp" readonly />       
+                  </li style="display:none;">
+                  <li style="display:none;">
                   <label>Cst Amnount</label>
-                  <input name="cst_amnt_inp" type="text" class="" id="cst_amnt_inp" readonly />
+                  <input name="cst_amnt_inp" type="hidden" class="" id="cst_amnt_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Exise State Tax %</label>
-                  <input name="exise_state_percentage_inp" type="text" class="" id="exise_state_percentage_inp" readonly />
+                  <input name="exise_state_percentage_inp" type="hidden" class="" id="exise_state_percentage_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Exise State Amnount</label>
-                  <input name="exise_state_amnt_inp" type="text" class="" id="exise_state_amnt_inp" readonly />
+                  <input name="exise_state_amnt_inp" type="hidden" class="" id="exise_state_amnt_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Exise Central  Tax %</label>
-                  <input name="exise_central_percentage_inp" type="text" class="" id="exise_central_percentage_inp" readonly />
+                  <input name="exise_central_percentage_inp" type="hidden" class="" id="exise_central_percentage_inp" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>Exise Central Amnount</label>
-                  <input name="exise_central_amnt_inp" type="text" class="" id="exise_central_amnt_inp" readonly />
+                  <input name="exise_central_amnt_inp" type="hidden" class="" id="exise_central_amnt_inp" readonly />
                   </li>
-                  <li>
+				  <li>
+                  <label>Order Remarks</label>
+                  <textarea id="order_remarks" name="order_remarks"></textarea>
+                  </li>
+				  <li>
                   <label>Distributor Price with tax</label>
                   <input name="distributor_price" id="distributor_price" type="text" class="wtUpload total_amount_input total_amount_input2" readonly />
                   </li>
-                  <li>
+                  <li style="display:none;">
                   <label>EAN No</label>
-                  <input name="ean_no" type="text" class="" id="ean_no" readonly />
+                  <input name="ean_no" type="hidden" class="" id="ean_no" readonly />
                   </li>
+				  
                   </ul>
                   </td>
                 </tr>
