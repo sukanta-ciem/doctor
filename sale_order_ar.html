@@ -79,6 +79,16 @@ a {
 .payment_toptable {
 	width:100%;
 }
+.textarea_field {
+    background: #e7efef;
+    border: 1px solid #819d9d;
+    padding: 5px;
+    width: 100%;
+    height: 100px;
+    margin: 5px auto;
+    box-sizing: border-box;
+    resize: none;
+}
 .text_field01 {
     background: #e7efef;
     border: 1px solid #819d9d;
@@ -285,9 +295,9 @@ $(document).ready(function(){
                   <input name="order_no" type="hidden" class="" id="order_no" value="" readonly />
                   <input style="display:none;" name="order_no_invalid_process" id="order_no_invalid_process" type="text" value="" required />
                   </li>
-                  <li style="display:none;">
+                  <li>
                   <label>Delivery date</label>
-				  <input name="deliveryDate" type="hidden" class=" editable_area" id="datepicker1" value="" readonly />
+				  <input name="deliveryDate" type="text" class=" editable_area" id="datepicker1" value="" readonly />
                   </li>
                   <li style="display:none;">
                   <label>Work Order No</label>
@@ -336,10 +346,6 @@ $(document).ready(function(){
                   <li style="display:none;">
                   <label>Exise Central Amnount</label>
                   <input name="exise_central_amnt_inp" type="hidden" class="" id="exise_central_amnt_inp" readonly />
-                  </li>
-				  <li>
-                  <label>Order Remarks</label>
-                  <textarea id="order_remarks" name="order_remarks"></textarea>
                   </li>
 				  <li>
                   <label>Distributor Price with tax</label>
@@ -429,6 +435,12 @@ $(document).ready(function(){
   <tr class="ext_padding_tr">
     <td>Date:</td>
     <td id="orderDate"></td>
+  </tr>
+  <tr class="ext_padding_tr">
+    <td colspan="2">
+    <p><strong>Payment Remarks:</strong></p>
+    <textarea name="payment_remarks" type="text" onchange="addSaleRemarks(this.value);" class="textarea_field wtUpload" id="sales_remarks"></textarea>
+    </td>
   </tr>
   <tr class="ext_padding_tr2">
   	<td colspan="2">
