@@ -128,6 +128,7 @@ function addInList(){
 				"billing_contact_no" : contact_no,
 				"billing_email" : email,
 				"delivery_date" : delivery_date,
+				"remarks" : "",
 				"order_placed" : "N",
 				"details" : []
 			};
@@ -168,6 +169,7 @@ function addInList(){
 					"billing_contact_no" : contact_no,
 					"billing_email" : email,
 					"delivery_date" : delivery_date,
+					"remarks" : "",
 					"order_placed" : "N",
 					"details" : []
 				};
@@ -205,6 +207,26 @@ function addInList(){
 	$("#contact_no").val(contact_no);
 	$("#special_distributor").val(special_distributor);
 	$("#distributor_id").val(dist_id);
+}
+
+function addSaleRemarks(sales_remarks){
+	document.getElementById("wrappers").className = "";
+	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+	var ordet = localStorage.getItem("order_details");
+	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+		alert("Error Occured!");
+	}else{
+		var or_det = JSON.parse(ordet);
+		for(var i = 0; i<or_det.length; i++)
+		{
+			if(or_det[i].order_no===order_no){
+				or_det[i].remarks = sales_remarks;
+				or_det_string = JSON.stringify(or_det);
+				localStorage.setItem("order_details", or_det_string);
+				alert("Your remarks Updated!");
+			}
+		}
+	}
 }
 
 function removeProduct(order_no1, order_count){
@@ -504,6 +526,7 @@ function addSaleOrder()
 				"billing_contact_no" : contact_no,
 				"billing_email" : email,
 				"delivery_date" : delivery_date,
+				"remarks" : "",
 				"order_placed" : "Y",
 				"details" : []
 			};
@@ -545,6 +568,7 @@ function addSaleOrder()
 					"billing_contact_no" : contact_no,
 					"billing_email" : email,
 					"delivery_date" : delivery_date,
+					"remarks" : "",
 					"order_placed" : "Y",
 					"details" : []
 				};
