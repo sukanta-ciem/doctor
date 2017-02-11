@@ -16,7 +16,7 @@ function sync(){
 	$("#syncPanel").css("height", $(window).height());
 	$("#syncPanel").show();
 	var order_details = localStorage.getItem("order_details");
-	var order = JSON.parse(order_details);
+	
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		alert("No pending Orders to upload!");
 		$("#order_place_panel").show();
@@ -24,6 +24,7 @@ function sync(){
 		return false;
 		//window.location.href = "sale_order_ar.html";
 	}
+	var order = JSON.parse(order_details);
 	$.ajax({
 		type: 'post',
 		url: site_url+'api/order_api.php',
@@ -43,7 +44,13 @@ function sync(){
 			}else{
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
-				alert("Error Occurred! \n Error is "+order_details);
+				alert("Error Occurred!");
+				var r = confirm("Do you want to clear all incomplete order?");
+				if(r==true){
+					localStorage.setItem("order_details","");
+					alert("Incomplete Orders cleared successfully!");
+					window.location.href = "sale_order_ar.html";
+				}
 				$("#order_place_panel").show();
 				$("#syncPanel").hide();
 				return false;
@@ -192,6 +199,13 @@ function addInList(){
 	orderHtml.push('<td align="center" class="bg06"><a style="text-decoration:none;" onClick="removeProduct('+order_no+','+order_count+');" href="javascript:void(0)">x</a></td>');
 	orderHtml.push("</tr>");
 	
+	var prevOrderAmnt = $("#orderTotalList").text();
+	prevOrderAmnt = parseFloat(prevOrderAmnt);
+	var currentOrderAmnt = parseFloat(distributor_price)*parseInt(qty);
+	var newOrderAmnt = prevOrderAmnt+currentOrderAmnt;
+	newOrderAmnt = newOrderAmnt.toFixed(2);
+	$("#orderTotalList").text(newOrderAmnt);
+	
 	if(orderHtml.length>0){
 		$("#orderView").find("tbody").append(orderHtml.join(""));
 		$("#orderView").find("tfoot").show();
@@ -253,6 +267,12 @@ function removeProduct(order_no1, order_count){
 				or_det_string = JSON.stringify(or_det);
 				localStorage.setItem("order_details", or_det_string);
 				$("#row_"+order_count).remove();
+				var prevOrderAmnt = $("#orderTotalList").text();
+				prevOrderAmnt = parseFloat(prevOrderAmnt);
+				var currentOrderAmnt = parseFloat(distributor_price)*parseInt(qty);
+				var newOrderAmnt = prevOrderAmnt+currentOrderAmnt;
+				newOrderAmnt = newOrderAmnt.toFixed(2);
+				$("#orderTotalList").text(newOrderAmnt);
 				alert("Product Removed Successfully!");
 			}
 		}
@@ -632,7 +652,7 @@ function fetch_data(prod_name)
 			if(product_details[i].other_detail.product_id === prod_id){
 				var product_mf_id = product_details[i].other_detail.product_mf_id;
 				var product_id = product_details[i].other_detail.product_id;
-				var qty_id = product_details[i].other_detail.qty;
+				var qty_id = product_details[i].other_detail.qty_id;
 				var sku = product_details[i].other_detail.sku;
 				var mrp = product_details[i].other_detail.mrp;
 				var base_purchase_price = product_details[i].other_detail.base_purchase_price;
