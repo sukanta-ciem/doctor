@@ -223,6 +223,26 @@ function addInList(){
 	$("#distributor_id").val(dist_id);
 }
 
+function resetForm(){
+	var distributor_name = $("#distributor_name").val();
+	var cred_amnt = $("#credit_note").val();
+	var email = $("#email").val();
+	var contact_no = $("#contact_no").val();
+	var special_distributor = $("#special_distributor").val();
+	var dist_id = $("#distributor_id").val();
+	var delivery_date = $("#datepicker1").val();
+	
+	document.getElementById("orderForm").reset();
+	
+	$("#distributor_name").val(distributor_name);
+	$("#distributor_name").attr("readonly", true);
+	$("#credit_note").val(cred_amnt);
+	$("#email").val(email);
+	$("#contact_no").val(contact_no);
+	$("#special_distributor").val(special_distributor);
+	$("#distributor_id").val(dist_id);
+}
+
 function addSaleRemarks(sales_remarks){
 	document.getElementById("wrappers").className = "";
 	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
