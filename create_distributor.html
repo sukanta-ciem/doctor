@@ -6,6 +6,32 @@
 <title>Untitled Document</title>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Archivo+Narrow" media="all" />
 <style type="text/css">
+#wrappers{
+	position: absolute;
+	background-color: #000;
+	text-align: center;
+	opacity: 0.8;
+	vertical-align: middle;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	display: inline-flex;
+	overflow:hidden;
+	height:146%;
+}
+
+#loader-cont{
+	height: 50px;
+	width: 49px;
+	background: #FFF none repeat scroll 0% 0%;
+	margin: 300px auto;
+	border-radius: 5px;
+	padding: 3px;
+}
+.hidden{
+	display:none !important;
+}
 * {
 	margin:0;
 	padding:0;
@@ -27,7 +53,7 @@ h3 {
     font-weight: normal;
     margin-bottom:10px;
 }
-input[type="text"], textarea, select{
+input[type="text"],input[type="email"], textarea, select{
 	width:100%;
 	box-sizing: border-box;
 	padding:5px;
@@ -68,37 +94,121 @@ input[type="submit"]:hover {
 </style>
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
+var site_url = "http://www.arishbionaturals.com/sales/";
+$(document).ready(function(){
+	var country = localStorage.getItem("country_details");
+	country = JSON.parse(country);
+	var countryHtml = [];
+	countryHtml.push("<option value=''>Select Country</option>");
+	for(var i = 0; i<country.length; i++)
+	{
+		countryHtml.push("<option value='"+country[i].country_id+"'>"+country[i].country_name+"</option>");
+	}
+	
+	$("#country").html(countryHtml.join(""));
+	document.getElementById("wrappers").className = "hidden";
+});
 function filterState(country_id)
 {
-	$.ajax({
-		type: 'post',
-		url: 'ajax_filter_state.php',
-		data: 'country_id='+country_id,
-		success: function(msg)
-		{
-			$('#state').html(msg);
+	if(country_id==""){
+		$('#state').html("<option value=''>Select State</option>");
+		$('#city').html("<option value=''>Select City</option>");
+		return false;
+	}
+	
+	var state = localStorage.getItem("state_details");
+	state = JSON.parse(state);
+	var stateHtml = [];
+	stateHtml.push("<option value=''>Select State</option>");
+	for(var i = 0; i<state.length; i++)
+	{
+		if(state[i].country_id == country_id){
+			stateHtml.push("<option value='"+state[i].state_id+"'>"+state[i].state_name+"</option>");
 		}
-	});
+	}
+	
+	$("#state").html(stateHtml.join(""));
 }
 
 function filter_city(state_id)
 {
+	if(state_id==""){
+		$('#city').html("<option value=''>Select City</option>");
+		return false;
+	}
+	
+	var city = localStorage.getItem("city_details");
+	city = JSON.parse(city);
+	var cityHtml = [];
+	cityHtml.push("<option value=''>Select City</option>");
+	for(var i = 0; i<city.length; i++)
+	{
+		if(city[i].state_id == state_id){
+			cityHtml.push("<option value='"+city[i].city_id+"'>"+city[i].city_name+"</option>");
+		}
+	}
+	
+	$("#city").html(cityHtml.join(""));
+}
+
+$(document).on("submit", "#createDistributorForm", function(event){
+	event.preventDefault();
+	var user = localStorage.getItem("username");
+	document.getElementById("wrappers").className = "";
+	var formData = $('#createDistributorForm').serialize();
+	
 	$.ajax({
-		type: 'post',
-		url: 'ajax_filter_city.php',
-		data: 'state_id='+state_id,
-		success: function(msg)
-		{
-			$('#city').html(msg);
+		type: "post",
+		url: site_url+"api/create_distributor_api.php",
+		data: formData+"&saleslogin_id="+user,
+		success: function(data){
+			data = JSON.parse(data);
+			if(data.status == "success"){
+				var exist = data.exist;
+				if(exist==1){
+					alert("Distributor is already registered!");
+					document.getElementById("wrappers").className = "hidden";
+					return false;
+				}else{
+					alert('Distributor created successfully!');
+					$.ajax({
+						type: 'post',
+						url: site_url+'api/distributor_api.php',
+						data: "user="+user,
+						async: false,
+						success: function(msg){
+							var data = JSON.parse(msg);
+							if(data.status === "success"){
+								var distributor_details = JSON.stringify(data.distributor);
+								localStorage.setItem("distributor_details", distributor_details);
+								document.getElementById("wrappers").className = "hidden";
+								window.location.href = "sale_order_ar.html";
+							}else{
+							/////do nothing
+							}
+						}
+					});
+				}
+			}else{
+				alert("Error Occured!");
+				document.getElementById("wrappers").className = "hidden";
+				return false;
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert('No Active network Connection is present!');
+			document.getElementById("wrappers").className = "hidden";
+			return false;
 		}
 	});
-}
+});
 </script>
 </head>
 
 <body>
+<div id="wrappers"><div id="loader-cont"><img src="images/ajax-loader.gif" /></div></div>
   <div class="padding01">
-  <form action="" method="post" enctype="multipart/form-data">
+  <form action="" method="post" enctype="multipart/form-data" id="createDistributorForm">
       <div class="bg07">
         <h3 align="left">Create Distributor</h3>
       </div>
@@ -115,7 +225,7 @@ function filter_city(state_id)
                 <tr>
                   <td>
                   <label><strong>E-mail :</strong><font color="#FF0000">*</font></label>
-                  <p><input name="email" type="text" class="text_field01" id="email" /></p>
+                  <p><input name="email" type="email" class="text_field01" id="email" required /></p>
                   </td>
                 </tr>
                 <tr>
