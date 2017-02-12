@@ -55,6 +55,25 @@ $(document).ready(function(){
 			  }
 		   }
 	    });
+		$.ajax({
+		   type: 'post',
+		   url: site_url+'api/country_state_city_api.php',
+		   data: "",
+		   async: false,
+		   success: function(msg){
+			  var data = JSON.parse(msg);
+			  if(data.status === "success"){
+				  var country_details = JSON.stringify(data.country);
+				  var state_details = JSON.stringify(data.state);
+				  var city_details = JSON.stringify(data.city);
+				  localStorage.setItem("country_details", country_details);
+				  localStorage.setItem("state_details", state_details);
+				  localStorage.setItem("city_details", city_details);
+			  }else{
+				/////do nothing
+			  }
+		   }
+	    });
 		window.location.href = "sale_order_ar.html";
 	}
 	$.ajax({
@@ -71,6 +90,24 @@ $(document).ready(function(){
 				/////do nothing
 			}
 		}
+	});
+	$.ajax({
+	   type: 'post',
+	   url: site_url+'api/country_state_city_api.php',
+	   data: "",
+	   success: function(msg){
+		  var data = JSON.parse(msg);
+		  if(data.status === "success"){
+			  var country_details = JSON.stringify(data.country);
+			  var state_details = JSON.stringify(data.state);
+			  var city_details = JSON.stringify(data.city);
+			  localStorage.setItem("country_details", country_details);
+			  localStorage.setItem("state_details", state_details);
+			  localStorage.setItem("city_details", city_details);
+		  }else{
+			/////do nothing
+		  }
+	   }
 	});
 	
 });

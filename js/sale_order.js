@@ -3,6 +3,7 @@ var site_url = "http://www.arishbionaturals.com/sales/";
 var addInStock = true;
 var order_no = parseInt(localStorage.getItem("order_no")) + 1;
 var order_count = 0;
+var reset_count = 0;
 
 $(document).ready(function(){
 	$("#order_no").val(order_no);
@@ -232,15 +233,24 @@ function resetForm(){
 	var dist_id = $("#distributor_id").val();
 	var delivery_date = $("#datepicker1").val();
 	
-	document.getElementById("orderForm").reset();
+	if(reset_count==0){
+		document.getElementById("orderForm").reset();
 	
-	$("#distributor_name").val(distributor_name);
-	$("#distributor_name").attr("readonly", true);
-	$("#credit_note").val(cred_amnt);
-	$("#email").val(email);
-	$("#contact_no").val(contact_no);
-	$("#special_distributor").val(special_distributor);
-	$("#distributor_id").val(dist_id);
+		$("#distributor_name").val(distributor_name);
+		$("#distributor_name").attr("readonly", true);
+		$("#credit_note").val(cred_amnt);
+		$("#email").val(email);
+		$("#contact_no").val(contact_no);
+		$("#special_distributor").val(special_distributor);
+		$("#distributor_id").val(dist_id);
+		reset_count++;
+	}else{
+		document.getElementById("orderForm").reset();
+		alert("Order List reset successfully!");
+		window.location.href = "sale_order_ar.html";
+	}
+	
+	
 }
 
 function addSaleRemarks(sales_remarks){
@@ -264,36 +274,42 @@ function addSaleRemarks(sales_remarks){
 }
 
 function removeProduct(order_no1, order_count){
-	document.getElementById("wrappers").className = "";
-	setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
-	var ordet = localStorage.getItem("order_details");
-	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
-		alert("Error Occured!");
-	}else{
-		var or_det = JSON.parse(ordet);
-		for(var i = 0; i<or_det.length; i++)
-		{
-			if(or_det[i].order_no===order_no1){
-				var prev_order_details = or_det[i].details;
-				for(var j=0; j<prev_order_details.length; j++)
-				{
-					var prev_one_order = prev_order_details[j];
-					if(prev_one_order[19]===order_count){
-						prev_order_details.splice(j, 1);
+	var r = confirm("Do you want to remove this product?");
+	if(r===true){
+		document.getElementById("wrappers").className = "";
+		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+		var ordet = localStorage.getItem("order_details");
+		if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+			alert("Error Occured!");
+		}else{
+			var or_det = JSON.parse(ordet);
+			for(var i = 0; i<or_det.length; i++)
+			{
+				if(or_det[i].order_no===order_no1){
+					var prev_order_details = or_det[i].details;
+					for(var j=0; j<prev_order_details.length; j++)
+					{
+						var prev_one_order = prev_order_details[j];
+						if(prev_one_order[19]===order_count){
+							prev_order_details.splice(j, 1);
+						}
 					}
+					
+					or_det[i].details = prev_order_details;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+					var distributor_price = $("#row_"+order_count+" td:nth-child(2)").text();
+					var qty = $("#row_"+order_count+" td:nth-child(3)").text();
+					$("#row_"+order_count).remove();
+					var prevOrderAmnt = $("#orderTotalList").text();
+					prevOrderAmnt = parseFloat(prevOrderAmnt);
+					
+					var currentOrderAmnt = parseFloat(distributor_price)*parseInt(qty);
+					var newOrderAmnt = prevOrderAmnt-currentOrderAmnt;
+					newOrderAmnt = newOrderAmnt.toFixed(2);
+					$("#orderTotalList").text(newOrderAmnt);
+					alert("Product Removed Successfully!");
 				}
-				
-				or_det[i].details = prev_order_details;
-				or_det_string = JSON.stringify(or_det);
-				localStorage.setItem("order_details", or_det_string);
-				$("#row_"+order_count).remove();
-				var prevOrderAmnt = $("#orderTotalList").text();
-				prevOrderAmnt = parseFloat(prevOrderAmnt);
-				var currentOrderAmnt = parseFloat(distributor_price)*parseInt(qty);
-				var newOrderAmnt = prevOrderAmnt+currentOrderAmnt;
-				newOrderAmnt = newOrderAmnt.toFixed(2);
-				$("#orderTotalList").text(newOrderAmnt);
-				alert("Product Removed Successfully!");
 			}
 		}
 	}
