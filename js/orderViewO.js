@@ -9,7 +9,7 @@ function sync(){
 	$("#syncPanel").css("height", $(window).height());
 	$("#syncPanel").show();
 	var order_details = localStorage.getItem("order_details");
-	var order = JSON.parse(order_details);
+	
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		alert("No pending Orders to upload!");
 		$("#order_place_panel").show();
@@ -17,6 +17,7 @@ function sync(){
 		return false;
 		//window.location.href = "sale_order_ar.html";
 	}
+	var order = JSON.parse(order_details);
 	$.ajax({
 		type: 'post',
 		url: site_url+'api/order_api.php',

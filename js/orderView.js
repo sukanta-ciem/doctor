@@ -9,7 +9,7 @@ function sync(){
 	$("#syncPanel").css("height", $(window).height());
 	$("#syncPanel").show();
 	var order_details = localStorage.getItem("order_details");
-	var order = JSON.parse(order_details);
+	
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		alert("No pending Orders to upload!");
 		$("#order_place_panel").show();
@@ -17,6 +17,7 @@ function sync(){
 		return false;
 		//window.location.href = "sale_order_ar.html";
 	}
+	var order = JSON.parse(order_details);
 	$.ajax({
 		type: 'post',
 		url: site_url+'api/order_api.php',
@@ -73,10 +74,11 @@ function searchOrder(){
 	var view_order_html_server = [];
 	var cnt = 1;
 	var order_details = localStorage.getItem("order_details");
-	var order = JSON.parse(order_details);
+	
 	if(order_details === null || order_details === "null" || typeof order_details === typeof undefined || order_details == "" || order_details == "[]"){
 		//no local order
 	}else{
+		var order = JSON.parse(order_details);
 		for(var i=0; i<order.length; i++)
 		{
 			var ode = toEpoch(order[i].order_date, false);
@@ -252,6 +254,9 @@ function openPopUp(elm, type, flag){
 					$("#orderNo").text("NA");
 					$("#distributorName").html(or_det[i].billing_name);
 					$("#orderDate").html(or_det[i].order_date);
+					$("#sales_remarks").val(or_det[i].remarks);
+					$("#sales_remarks").attr("data-orderNo",or_det[i].order_no);
+					$("#sales_remarks").attr("data-type","local");
 					if(product_html.length>0){
 						$("#orderViewPanelProduct").find("tbody").html(product_html.join(""));
 					}else{
@@ -312,6 +317,9 @@ function openPopUp(elm, type, flag){
 					$("#orderNo").text(or_det[i].order_no);
 					$("#distributorName").html(or_det[i].billing_name);
 					$("#orderDate").html(or_det[i].order_date);
+					$("#sales_remarks").val(or_det[i].remarks);
+					$("#sales_remarks").attr("data-orderNo",or_det[i].order_no);
+					$("#sales_remarks").attr("data-type","server");
 					if(product_html.length>0){
 						$("#orderViewPanelProduct").find("tbody").html(product_html.join(""));
 					}else{
@@ -327,6 +335,53 @@ function openPopUp(elm, type, flag){
 				}
 			}
 		}
+	}
+}
+
+function addSaleRemarks(){
+	var sales_remarks = $("#sales_remarks").val();
+	var orderType = $("#sales_remarks").attr("data-type");
+	var order_nos = $("#sales_remarks").attr("data-orderNo");
+	document.getElementById("wrappers").className = "";
+	
+	if(orderType=="local"){
+		setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+		var ordet = localStorage.getItem("order_details");
+		if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
+			alert("Error Occured!");
+		}else{
+			var or_det = JSON.parse(ordet);
+			for(var i = 0; i<or_det.length; i++)
+			{
+				if(or_det[i].order_no===parseInt(order_nos)){
+					or_det[i].remarks = sales_remarks;
+					or_det_string = JSON.stringify(or_det);
+					localStorage.setItem("order_details", or_det_string);
+					alert("Your remarks Updated!");
+				}
+			}
+		}
+	}else{
+		$.ajax({
+			type: 'post',
+			url: site_url+'api/update_remarks_api.php',
+			data: "remarks="+encodeURIComponent(sales_remarks)+"&order_no="+order_nos,
+			success: function(msg){
+				var data = JSON.parse(msg);
+				setTimeout(function(){ document.getElementById("wrappers").className = "hidden"; }, 2000);
+				if(data.status === "success"){
+					alert("Remarks updated successfully!");
+					return false;								
+				}else{
+					alert("Error! Please try after some time!");
+					return false;
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert('No Active network Connection is present!');
+				return false;
+			}
+		});
 	}
 }
 

@@ -46,12 +46,12 @@ function sync(){
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
 				alert("Error Occurred!");
-				var r = confirm("Do you want to clear all incomplete order?");
+				/*var r = confirm("Do you want to clear all incomplete order?");
 				if(r==true){
 					localStorage.setItem("order_details","");
 					alert("Incomplete Orders cleared successfully!");
 					window.location.href = "sale_order_ar.html";
-				}
+				}*/
 				$("#order_place_panel").show();
 				$("#syncPanel").hide();
 				return false;
