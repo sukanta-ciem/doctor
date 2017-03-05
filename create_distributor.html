@@ -170,7 +170,6 @@ $(document).on("submit", "#createDistributorForm", function(event){
 					document.getElementById("wrappers").className = "hidden";
 					return false;
 				}else{
-					alert('Distributor created successfully!');
 					$.ajax({
 						type: 'post',
 						url: site_url+'api/distributor_api.php',
@@ -182,7 +181,8 @@ $(document).on("submit", "#createDistributorForm", function(event){
 								var distributor_details = JSON.stringify(data.distributor);
 								localStorage.setItem("distributor_details", distributor_details);
 								document.getElementById("wrappers").className = "hidden";
-								window.location.href = "sale_order_ar.html";
+								alert('Distributor created successfully!');
+								window.top.location.href = "sale_order_ar.html";
 							}else{
 							/////do nothing
 							}
@@ -225,7 +225,7 @@ $(document).on("submit", "#createDistributorForm", function(event){
                 <tr>
                   <td>
                   <label><strong>E-mail :</strong><font color="#FF0000">*</font></label>
-                  <p><input name="email" type="email" class="text_field01" id="email" required /></p>
+                  <p><input name="email" type="email" class="text_field01" id="email" /></p>
                   </td>
                 </tr>
                 <tr>
@@ -280,13 +280,13 @@ $(document).on("submit", "#createDistributorForm", function(event){
                 <tr>
                   <td>
                   <label><strong>Landmark</strong><font color="#FF0000">*</font></label>
-                  <p><input name="landmark" type="text" class="text_field01" id="landmark" required /></p>
+                  <p><input name="landmark" type="text" class="text_field01" id="landmark" /></p>
                   </td>
                 </tr>
                 <tr>
                   <td>
                   <label><strong>Address</strong><font color="#FF0000">*</font></label>
-                  <p><textarea name="address" type="text" class="text_field01" id="address" required></textarea></p>
+                  <p><textarea name="address" type="text" class="text_field01" id="address"></textarea></p>
                   </td>
                 </tr>
                 
