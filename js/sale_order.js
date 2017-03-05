@@ -45,7 +45,7 @@ function sync(){
 			}else{
 				var order_details = JSON.stringify(data.order_details);
 				localStorage.setItem("order_details", order_details);
-				alert("Error Occurred!");
+				//alert("Error Occurred!");
 				/*var r = confirm("Do you want to clear all incomplete order?");
 				if(r==true){
 					localStorage.setItem("order_details","");
@@ -64,6 +64,15 @@ function sync(){
 			return false;
 	    }
 	});
+}
+
+function clearOrder(){
+	var r = confirm("Do you want to clear all pending order?");
+	if(r==true){
+		localStorage.setItem("order_details","");
+		alert("All pending Orders cleared successfully!");
+		window.location.href = "sale_order_ar.html";
+	}
 }
 
 function addInList(){
@@ -122,7 +131,7 @@ function addInList(){
 	if(ordet === null || ordet === "null" || typeof ordet === typeof undefined || ordet == "" || ordet == "[]"){
 		var or_det = [];
 		var product_qty = $("#product_qty").val();
-		if(product_qty === "" || product_qty === 0){
+		if(product_qty == "" || product_qty == 0){
 			alert("Enter Product Quantity!");
 			return false;
 		}else{
@@ -149,7 +158,7 @@ function addInList(){
 		}
 	}else{
 		var or_det = JSON.parse(ordet);
-		if(product_qty === "" || product_qty === 0){
+		if(product_qty == "" || product_qty == 0){
 			alert("Enter Product Quantity!");
 			return false;
 		}else{
@@ -568,7 +577,7 @@ function addSaleOrder()
 		var proName = $("#prod_id").val();
 		var product_qty = $("#product_qty").val();
 		var distributor_price = $("#distributor_price").val();
-		if(product_qty === "" || product_qty === 0){
+		if(product_qty == "" || product_qty == 0){
 			alert("Enter Product Quantity!");
 			return false;
 		}else{
@@ -595,7 +604,7 @@ function addSaleOrder()
 		}
 	}else{
 		var or_det = JSON.parse(ordet);
-		if(product_qty === "" || product_qty === 0){
+		if(product_qty == "" || product_qty == 0){
 			alert("Enter Product Quantity!");
 			return false;
 		}else{
