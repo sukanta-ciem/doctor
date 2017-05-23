@@ -1,0 +1,67 @@
+body.bo1{   /* doct.html */
+	background:url('doctor.jpg') no-repeat;
+	background-size:cover;
+     font-family:Arial;
+}
+body.bo2{   /*doctos.html*/
+	background:url('imagess.jpg') no-repeat;
+	background-size:cover;
+     font-family:Arial;
+}
+ul.u1{     /* doct.html */
+	text-decoration:none;
+	font-family:Arial;
+    font-size:25px;
+	width:40%;
+	float:left;
+}
+h2.v1{   /* doct.html */ 
+	
+	font-size:40px;
+	color:blue;
+}
+ul.u2{   /*doct.html */
+	text-decoration:none;
+	font-family:Arial;
+	font-size:25px;
+	width:40%;
+	float:right;
+	
+}
+ul li a:hover{  /* doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	background-color:green;
+	
+}
+ul  li{    /* doct.html */
+    color:white;
+	font-size:20px;
+	font-family:Arial;
+	width:400px;
+	height:40px;
+	background-color:black;
+	padding:4px;
+	opacity:.8;
+	border:2px solid blue;
+	line-height:40px;
+}
+ul li a {  /* doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html   */
+	color:white;
+	display:block;
+	text-decoration:none;
+}
+b.n1{   /*!-- doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	font-size:40px;
+}
+ul li.l6{   /* doctors.html */
+float:left;
+	width:30%;
+	height:70px;
+	color:white;
+	background-color:black;
+	opacity:.8;
+	line-height:40px;
+	
+	font-size:20px;
+	margin-left:12%;
+	margin-top:20%;
+}

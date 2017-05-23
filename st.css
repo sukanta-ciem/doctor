@@ -1,0 +1,24 @@
+ul{   /*doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	padding:0px;
+	margin:0px;
+	list-style:none;
+}
+ul li.l1{   /*doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	float:left;
+	width:20%;
+	height:40px;
+	color:white;
+	background-color:black;
+	opacity:.8;
+	line-height:40px;
+	text-align:center;
+	font-size:20px;
+}
+a.h1{   /*doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	text-decoration:none;
+	color:white;
+	display:block;
+}
+a.h1:hover{  /*doct,doct1,doct2,doct3,doct4,doct5,doct7,doct8,doct9,doct10,doct11,doct13,doct14,doct17,doct18,doct20.html */
+	background-color:green;
+}
