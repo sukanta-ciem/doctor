@@ -7,10 +7,10 @@
 
 <!-- versionCode is optional and Android only -->
 
-  <name>Arish Bio</name>
+  <name>Doctors</name>
 
   <description>
-      Aris is a leading Bio Naturals product Manufacturing Company.
+      Doctors is a informative app which provide all the details of the best doctors of Burdwan.
   </description>
   
   <platform name="android">
